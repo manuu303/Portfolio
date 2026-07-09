@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Muhammad Muneeb Awan · Work</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <style>
+        /* ===== CSS Variables (themes) ===== */
+        :root {
+            --bg-body: #eaf1f8;
+            --bg-dashboard: rgba(255, 255, 255, 0.72);
+            --bg-topbar: #1e3a5f;
+            --text-primary: #132e48;
+            --text-secondary: #244d6e;
+            --text-light: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --card-border: rgba(200, 215, 235, 0.6);
+            --shadow: 0 30px 60px -20px rgba(0, 30, 50, 0.25);
+            --badge-bg: #ffffff;
+            --badge-border: #cde1f2;
+            --stat-icon-bg: #e5f0ff;
+            --stat-icon-color: #1e3a5f;
+            --hover-bg: #2c5282;
+            --nav-active: #2f5b92;
+            --lang-bg: #e6f0fc;
+            --lang-border: #b9d4f0;
+            --lang-color: #1e3a5f;
+            --highlight-bg: #e5f0ff;
+            --highlight-border: #1e3a5f;
+            --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --nav-text: #d6e8ff;
+            --gradient-start: #ffffff;
+            --gradient-end: #7fb0e6;
+            --tech-tag-bg: #e5f0ff;
+            --tech-tag-color: #1e3a5f;
+            --project-overlay: rgba(30, 58, 95, 0.85);
+        }
+
+        [data-theme="dark"] {
+            --bg-body: #0a0f1a;
+            --bg-dashboard: rgba(16, 26, 46, 0.92);
+            --bg-topbar: #0d1a2e;
+            --text-primary: #e8f0fe;
+            --text-secondary: #a8c4e6;
+            --text-light: #ffffff;
+            --card-bg: rgba(26, 42, 68, 0.85);
+            --card-border: rgba(60, 95, 145, 0.5);
+            --shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.8);
+            --badge-bg: #1a2d44;
+            --badge-border: #2a4a6a;
+            --stat-icon-bg: #1a2d44;
+            --stat-icon-color: #6db3f2;
+            --hover-bg: #1a3a5a;
+            --nav-active: #1e3a5f;
+            --lang-bg: #1a2d44;
+            --lang-border: #2a4a6a;
+            --lang-color: #a8c4e6;
+            --highlight-bg: #1a2d44;
+            --highlight-border: #4a8ac4;
+            --nav-text: #a8c4e6;
+            --gradient-start: #6db3f2;
+            --gradient-end: #4a8ac4;
+            --tech-tag-bg: #1a2d44;
+            --tech-tag-color: #6db3f2;
+            --project-overlay: rgba(13, 26, 46, 0.9);
+        }
+
+        /* ===== Reset & Base ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+            background: var(--bg-body);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            transition: background var(--transition);
+        }
+
+        /* ===== Dashboard ===== */
+        .dashboard {
+            width: 1400px;
+            max-width: 100%;
+            background: var(--bg-dashboard);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 40px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: all var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* ===== Top Bar ===== */
+        .top-bar {
+            background: var(--bg-topbar);
+            color: var(--text-light);
+            padding: 18px 32px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px 24px;
+            transition: background var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .top-bar::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .top-profile h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            line-height: 1.1;
+            background: linear-gradient(135deg, var(--gradient-start) 60%, var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .top-profile .sub {
+            font-size: 0.9rem;
+            opacity: 0.85;
+            margin-top: 2px;
+            font-weight: 400;
+            -webkit-text-fill-color: var(--text-light);
+            color: var(--text-light);
+        }
+
+        /* Navigation */
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
+            gap: 6px;
+        }
+
+        .nav-links a {
+            color: var(--nav-text);
+            text-decoration: none;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            background: transparent;
+            position: relative;
+        }
+
+        .nav-links a i {
+            font-size: 1.1rem;
+        }
+
+        .nav-links .active a {
+            background: var(--nav-active);
+            color: white;
+            box-shadow: 0 8px 18px -8px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-links a:not(.active):hover {
+            background: var(--hover-bg);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Tech badges */
+        .lang-section {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px 14px;
+        }
+
+        .lang-label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-light);
+        }
+
+        .lang-badge {
+            background: var(--lang-bg);
+            border: 1px solid var(--lang-border);
+            color: var(--lang-color);
+            padding: 5px 16px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            cursor: default;
+        }
+
+        .lang-badge i {
+            font-size: 1rem;
+            color: var(--lang-color);
+        }
+
+        .lang-badge:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.3);
+        }
+
+        .top-footer {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: auto;
+        }
+
+        /* ===== Theme Toggle ===== */
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(4px);
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.05);
+        }
+
+        .theme-toggle i {
+            font-size: 1.1rem;
+        }
+
+        /* ===== Main Content ===== */
+        .main {
+            background: transparent;
+            padding: 28px 32px 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 26px;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .main-header h1 {
+            font-size: 2.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            transition: color var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .main-header h1 i {
+            color: var(--stat-icon-color);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .badge {
+            background: var(--badge-bg);
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: 500;
+            color: var(--text-primary);
+            box-shadow: 0 4px 12px rgba(0, 30, 60, 0.06);
+            border: 1px solid var(--badge-border);
+            font-size: 0.95rem;
+            transition: all var(--transition);
+            backdrop-filter: blur(4px);
+        }
+
+        .badge i {
+            margin-right: 8px;
+        }
+
+        /* ===== Experience Section ===== */
+        .experience-section {
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            border-radius: 26px;
+            padding: 30px;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 10px 22px -16px rgba(0, 0, 0, 0.08);
+            transition: all var(--transition);
+            animation: slideUp 0.6s ease backwards;
+            animation-delay: 0.1s;
+        }
+
+        .experience-section:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -16px rgba(0, 30, 60, 0.15);
+        }
+
+        .experience-section h2 {
+            color: var(--text-primary);
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 2px solid var(--card-border);
+            padding-bottom: 14px;
+        }
+
+        .experience-section h2 i {
+            color: var(--stat-icon-color);
+        }
+
+        .exp-item {
+            display: flex;
+            gap: 20px;
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--card-border);
+            border-radius: 22px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 22px -16px rgba(0, 0, 0, .08);
+            transition: all .35s ease;
+        }
+
+        .exp-item:hover {
+            transform: translateY(-6px);
+            border-color: var(--stat-icon-color);
+            box-shadow: 0 24px 48px -20px rgba(0, 30, 60, .2);
+        }
+
+        .exp-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--stat-icon-bg);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            color: var(--stat-icon-color);
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .exp-item:hover .exp-icon {
+            transform: scale(1.1) rotate(4deg);
+        }
+
+        .exp-details {
+            flex: 1;
+        }
+
+        .exp-details h3 {
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+
+        .exp-details .company {
+            color: var(--stat-icon-color);
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .exp-details .date {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin: 4px 0 10px;
+        }
+
+        .exp-details p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .tech-tag {
+            background: var(--tech-tag-bg);
+            color: var(--tech-tag-color);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .tech-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px -6px rgba(0, 0, 0, 0.2);
+        }
+
+        /* ===== Projects Grid ===== */
+        .projects-section h2 {
+            color: var(--text-primary);
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .projects-section h2 i {
+            color: var(--stat-icon-color);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            border-radius: 26px;
+            padding: 28px;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 10px 22px -16px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: slideUp 0.6s ease backwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .project-card:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        .project-card:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .project-card:nth-child(4) {
+            animation-delay: 0.5s;
+        }
+
+        .project-card:nth-child(5) {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 48px -20px rgba(0, 30, 60, 0.2);
+            border-color: var(--stat-icon-color);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--stat-icon-color), var(--gradient-end));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 14px;
+        }
+
+        .project-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--stat-icon-bg);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            color: var(--stat-icon-color);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover .project-icon {
+            transform: scale(1.1) rotate(6deg);
+        }
+
+        .project-card h3 {
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 14px;
+        }
+
+        .project-techs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 14px;
+        }
+
+        .project-tech {
+            background: var(--tech-tag-bg);
+            color: var(--tech-tag-color);
+            padding: 3px 12px;
+            border-radius: 16px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--stat-icon-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 6px 14px;
+            border-radius: 20px;
+            background: var(--stat-icon-bg);
+        }
+
+        .project-link:hover {
+            background: var(--stat-icon-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 1000px) {
+            .top-bar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 16px;
+            }
+
+            .top-profile {
+                text-align: center;
+            }
+
+            .nav-links {
+                justify-content: center;
+            }
+
+            .lang-section {
+                justify-content: center;
+            }
+
+            .top-footer {
+                margin-left: 0;
+                justify-content: center;
+            }
+
+            .theme-toggle {
+                align-self: center;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .top-bar {
+                padding: 16px 18px;
+            }
+
+            .top-profile h2 {
+                font-size: 1.5rem;
+            }
+
+            .nav-links a {
+                font-size: 0.85rem;
+                padding: 6px 12px;
+                gap: 6px;
+            }
+
+            .nav-links a i {
+                font-size: 0.9rem;
+            }
+
+            .main {
+                padding: 20px 16px 26px;
+            }
+
+            .main-header h1 {
+                font-size: 1.7rem;
+            }
+
+            .experience-section {
+                padding: 20px;
+            }
+
+            .exp-item {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .exp-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 1.4rem;
+            }
+
+            .project-card {
+                padding: 20px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .badge {
+                font-size: 0.8rem;
+                padding: 6px 16px;
+            }
+
+            .theme-toggle {
+                font-size: 0.8rem;
+                padding: 6px 12px;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .nav-links a {
+                font-size: 0.75rem;
+                padding: 4px 10px;
+            }
+
+            .project-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .project-links {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .project-link {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <!-- TOP BAR -->
+        <div class="top-bar">
+            <div class="top-profile">
+                <h2>Muhammad Muneeb Awan</h2>
+                <div class="sub"><i class="fas fa-laptop-code" style="margin-right:6px;"></i>BS General Computing · 2nd
+                    Semester</div>
+            </div>
+
+            <!-- Navigation with all pages -->
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fas fa-home"></i> Main</a></li>
+                <li><a href="contact.html"><i class="fas fa-address-book"></i> Contact</a></li>
+                <li><a href="missions.html"><i class="fas fa-bullseye"></i> Missions</a></li>
+                <li class="active"><a href="work.html"><i class="fas fa-briefcase"></i> Work</a></li>
+            </ul>
+
+            <!-- Tech badges -->
+            <div class="lang-section">
+                <span class="lang-label"><i class="fas fa-code"></i> Tech:</span>
+                <span class="lang-badge"><i class="fab fa-html5"></i> HTML</span>
+                <span class="lang-badge"><i class="fab fa-css3-alt"></i> CSS</span>
+                <span class="lang-badge"><i class="fab fa-js"></i> JavaScript</span>
+                <span class="lang-badge"><i class="fa-brands fa-flutter"></i> Flutter</span>
+                <span class="lang-badge"><i class="fas fa-vial"></i> Playwright</span>
+                <span class="lang-badge"><i class="fas fa-code"></i> C++</span>
+            </div>
+
+            <!-- Theme Toggle + Footer -->
+            <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i> <span id="themeLabel">Dark</span>
+                </button>
+                <div class="top-footer">
+                    <i class="fas fa-circle-user"></i> 2026
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="main">
+            <div class="main-header">
+                <h1><i class="fas fa-briefcase"></i> Work</h1>
+                <span class="badge"><i class="fas fa-mobile-alt"></i> Flutter Developer · 5 Applications</span>
+            </div>
+
+
+            <!-- Experience Section -->
+            <div class="experience-section">
+                <h2><i class="fas fa-building"></i> Experience</h2>
+
+                <div class="exp-item">
+                    <div class="exp-icon"><i class="fas fa-mobile-screen-button"></i></div>
+
+                    <div class="exp-details">
+                        <h3>Flutter Application Development Intern</h3>
+
+                        <div class="company">SoftTech Media · Islamabad</div>
+
+                        <div class="date">
+                            <i class="far fa-calendar-alt"></i> 2026 - Present
+                        </div>
+
+                        <p>
+                            Developing modern cross-platform mobile applications using Flutter and Dart.
+                            Working on real-world projects by designing responsive user interfaces,
+                            integrating REST APIs and Firebase services, implementing state management,
+                            fixing bugs, optimizing application performance, and collaborating with the
+                            development team to deliver high-quality mobile applications.
+                        </p>
+
+                        <div class="tech-tags">
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">Dart</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">REST API</span>
+                            <span class="tech-tag">Git</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exp-item">
+                <div class="exp-icon"><i class="fas fa-graduation-cap"></i></div>
+
+                <div class="exp-details">
+                    <h3>Flutter Application Developer</h3>
+
+                    <div class="company">PMAS ARID Agriculture University · Rawalpindi</div>
+
+                    <div class="date">
+                        <i class="far fa-calendar-alt"></i> 2026 - Present
+                    </div>
+
+                    <p>
+                        Pursuing a BS in General Computing while specializing in Flutter application development.
+                        Building modern Android applications, strengthening problem-solving skills, and gaining hands-on
+                        experience in mobile app architecture, UI/UX design, Firebase integration, REST APIs,
+                        and software engineering principles through academic and personal projects.
+                    </p>
+
+                    <div class="tech-tags">
+                        <span class="tech-tag">Flutter</span>
+                        <span class="tech-tag">Dart</span>
+                        <span class="tech-tag">Firebase</span>
+                        <span class="tech-tag">REST API</span>
+                        <span class="tech-tag">OOP</span>
+                        <span class="tech-tag">Git</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projects Section -->
+            <div class="projects-section">
+                <h2><i class="fas fa-folder-open"></i> Featured Projects</h2>
+
+                <div class="projects-grid">
+                    <!-- Project 1 -->
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-icon"><i class="fas fa-car"></i></div>
+                            <h3>Car Rental Application</h3>
+                        </div>
+
+                        <p>
+                            A modern Flutter application that allows users to browse, search, and rent vehicles with
+                            an elegant UI, detailed vehicle information, booking management, and Firebase
+                            authentication.
+                        </p>
+
+                        <div class="project-techs">
+                            <span class="project-tech">Flutter</span>
+                            <span class="project-tech">Dart</span>
+                            <span class="project-tech">Firebase</span>
+                            <span class="project-tech">Provider</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
+                            <a href="#" class="project-link"><i class="fas fa-mobile-alt"></i> Demo</a>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-icon"><i class="fas fa-shopping-cart"></i></div>
+                            <h3>E-Commerce Mobile App</h3>
+                        </div>
+
+                        <p>
+                            A complete shopping application featuring product browsing, categories, shopping cart,
+                            wishlist, secure authentication, and responsive Flutter UI integrated with REST APIs.
+                        </p>
+
+                        <div class="project-techs">
+                            <span class="project-tech">Flutter</span>
+                            <span class="project-tech">REST API</span>
+                            <span class="project-tech">Firebase</span>
+                            <span class="project-tech">Dart</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
+                            <a href="#" class="project-link"><i class="fas fa-mobile-alt"></i> Demo</a>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-icon"><i class="fas fa-list-check"></i></div>
+                            <h3>Task Management App</h3>
+                        </div>
+
+                        <p>
+                            A productivity application with task scheduling, reminders, local database support,
+                            dark mode, and clean architecture for efficient task management.
+                        </p>
+
+                        <div class="project-techs">
+                            <span class="project-tech">Flutter</span>
+                            <span class="project-tech">SQLite</span>
+                            <span class="project-tech">Provider</span>
+                            <span class="project-tech">Dart</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
+                            <a href="#" class="project-link"><i class="fas fa-mobile-alt"></i> Demo</a>
+                        </div>
+                    </div>
+
+                    <!-- Project 4 -->
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-icon"><i class="fas fa-cloud-sun"></i></div>
+                            <h3>Weather Forecast App</h3>
+                        </div>
+
+                        <p>
+                            A Flutter weather application that provides real-time weather updates, 7-day forecasts,
+                            location services, and API integration with a beautiful user interface.
+                        </p>
+
+                        <div class="project-techs">
+                            <span class="project-tech">Flutter</span>
+                            <span class="project-tech">REST API</span>
+                            <span class="project-tech">Geolocation</span>
+                            <span class="project-tech">Dart</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
+                            <a href="#" class="project-link"><i class="fas fa-mobile-alt"></i> Demo</a>
+                        </div>
+                    </div>
+
+                    <!-- Project 5 -->
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-icon"><i class="fas fa-wallet"></i></div>
+                            <h3>Expense Tracker App</h3>
+                        </div>
+
+                        <p>
+                            A personal finance application that helps users track income and expenses,
+                            visualize spending with charts, and manage budgets using Flutter and local storage.
+                        </p>
+
+                        <div class="project-techs">
+                            <span class="project-tech">Flutter</span>
+                            <span class="project-tech">Hive</span>
+                            <span class="project-tech">Charts</span>
+                            <span class="project-tech">Dart</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
+                            <a href="#" class="project-link"><i class="fas fa-mobile-alt"></i> Demo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== JavaScript: Theme Toggle ===== -->
+        <script>
+            (function () {
+                // Theme Toggle
+                const themeToggle = document.getElementById('themeToggle');
+                const themeLabel = document.getElementById('themeLabel');
+                const html = document.documentElement;
+
+                let currentTheme = localStorage.getItem('theme') || 'light';
+                html.setAttribute('data-theme', currentTheme);
+                updateIcon(currentTheme);
+
+                themeToggle.addEventListener('click', function () {
+                    const newTheme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+                    html.setAttribute('data-theme', newTheme);
+                    localStorage.setItem('theme', newTheme);
+                    updateIcon(newTheme);
+                });
+
+                function updateIcon(theme) {
+                    const icon = themeToggle.querySelector('i');
+                    if (theme === 'dark') {
+                        icon.className = 'fas fa-sun';
+                        themeLabel.textContent = 'Light';
+                    } else {
+                        icon.className = 'fas fa-moon';
+                        themeLabel.textContent = 'Dark';
+                    }
+                }
+
+                console.log('💼 Work page — Muhammad Muneeb Awan');
+                console.log('📁 Check out my projects and experience!');
+            })();
+        </script>
+
+</body>
+
+</html>
