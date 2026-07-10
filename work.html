@@ -3,12 +3,18 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     <title>Muhammad Muneeb Awan · Work</title>
-    <!-- Font Awesome 6 -->
+    <!-- Font Awesome 7 (Free) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
     <style>
         /* ===== CSS Variables (themes) ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
             --bg-body: #eaf1f8;
             --bg-dashboard: rgba(255, 255, 255, 0.72);
@@ -37,6 +43,7 @@
             --tech-tag-bg: #e5f0ff;
             --tech-tag-color: #1e3a5f;
             --project-overlay: rgba(30, 58, 95, 0.85);
+            --border-subtle: rgba(255, 255, 255, 0.08);
         }
 
         [data-theme="dark"] {
@@ -66,13 +73,7 @@
             --tech-tag-bg: #1a2d44;
             --tech-tag-color: #6db3f2;
             --project-overlay: rgba(13, 26, 46, 0.9);
-        }
-
-        /* ===== Reset & Base ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            --border-subtle: rgba(255, 255, 255, 0.05);
         }
 
         body {
@@ -82,8 +83,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 16px;
             transition: background var(--transition);
+            margin: 0;
         }
 
         /* ===== Dashboard ===== */
@@ -97,19 +99,19 @@
             box-shadow: var(--shadow);
             overflow: hidden;
             transition: all var(--transition);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border-subtle);
         }
 
         /* ===== Top Bar ===== */
         .top-bar {
             background: var(--bg-topbar);
             color: var(--text-light);
-            padding: 18px 32px;
+            padding: 16px 24px;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            gap: 18px 24px;
+            gap: 14px 20px;
             transition: background var(--transition);
             position: relative;
             overflow: hidden;
@@ -128,23 +130,28 @@
         }
 
         .top-profile h2 {
-            font-size: 1.8rem;
+            font-size: clamp(1.3rem, 5vw, 1.9rem);
             font-weight: 700;
             letter-spacing: -0.3px;
-            line-height: 1.1;
+            line-height: 1.2;
             background: linear-gradient(135deg, var(--gradient-start) 60%, var(--gradient-end));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            display: inline-block;
         }
 
         .top-profile .sub {
-            font-size: 0.9rem;
+            font-size: clamp(0.7rem, 2vw, 0.9rem);
             opacity: 0.85;
             margin-top: 2px;
             font-weight: 400;
             -webkit-text-fill-color: var(--text-light);
             color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex-wrap: wrap;
         }
 
         /* Navigation */
@@ -152,17 +159,19 @@
             display: flex;
             flex-wrap: wrap;
             list-style: none;
-            gap: 6px;
+            gap: 4px 6px;
+            justify-content: center;
+            flex: 1 1 auto;
         }
 
         .nav-links a {
             color: var(--nav-text);
             text-decoration: none;
-            font-size: 1.05rem;
+            font-size: clamp(0.75rem, 1.6vw, 1.05rem);
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 10px 20px;
+            gap: 6px;
+            padding: 8px 14px;
             border-radius: 40px;
             font-weight: 500;
             transition: all 0.3s ease;
@@ -172,7 +181,7 @@
         }
 
         .nav-links a i {
-            font-size: 1.1rem;
+            font-size: clamp(0.8rem, 1.4vw, 1.1rem);
         }
 
         .nav-links .active a {
@@ -192,16 +201,17 @@
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 10px 14px;
+            gap: 6px 10px;
+            justify-content: center;
         }
 
         .lang-label {
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: clamp(0.7rem, 1.2vw, 0.9rem);
             opacity: 0.9;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             color: var(--text-light);
         }
 
@@ -209,20 +219,20 @@
             background: var(--lang-bg);
             border: 1px solid var(--lang-border);
             color: var(--lang-color);
-            padding: 5px 16px;
+            padding: 4px 12px;
             border-radius: 40px;
-            font-size: 0.85rem;
+            font-size: clamp(0.65rem, 1.1vw, 0.85rem);
             font-weight: 500;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             transition: all 0.3s ease;
             white-space: nowrap;
             cursor: default;
         }
 
         .lang-badge i {
-            font-size: 1rem;
+            font-size: clamp(0.7rem, 1vw, 1rem);
             color: var(--lang-color);
         }
 
@@ -232,13 +242,12 @@
         }
 
         .top-footer {
-            font-size: 0.8rem;
+            font-size: clamp(0.65rem, 1.2vw, 0.8rem);
             opacity: 0.7;
             color: var(--text-light);
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin-left: auto;
+            gap: 6px;
         }
 
         /* ===== Theme Toggle ===== */
@@ -246,15 +255,16 @@
             background: rgba(255, 255, 255, 0.12);
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: white;
-            padding: 8px 16px;
+            padding: 6px 14px;
             border-radius: 40px;
             cursor: pointer;
-            font-size: 0.95rem;
+            font-size: clamp(0.7rem, 1.2vw, 0.95rem);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             transition: all 0.3s ease;
             backdrop-filter: blur(4px);
+            flex-shrink: 0;
         }
 
         .theme-toggle:hover {
@@ -263,16 +273,16 @@
         }
 
         .theme-toggle i {
-            font-size: 1.1rem;
+            font-size: clamp(0.8rem, 1.2vw, 1.1rem);
         }
 
         /* ===== Main Content ===== */
         .main {
             background: transparent;
-            padding: 28px 32px 32px;
+            padding: 24px 20px 28px;
             display: flex;
             flex-direction: column;
-            gap: 26px;
+            gap: 22px;
             animation: fadeInUp 0.6s ease;
         }
 
@@ -293,17 +303,17 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 10px 16px;
         }
 
         .main-header h1 {
-            font-size: 2.1rem;
+            font-size: clamp(1.5rem, 5vw, 2.2rem);
             font-weight: 700;
             color: var(--text-primary);
             transition: color var(--transition);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
         }
 
         .main-header h1 i {
@@ -319,25 +329,28 @@
             }
 
             50% {
-                transform: scale(1.1);
+                transform: scale(1.08);
             }
         }
 
         .badge {
             background: var(--badge-bg);
-            padding: 10px 24px;
+            padding: 8px 18px;
             border-radius: 40px;
             font-weight: 500;
             color: var(--text-primary);
             box-shadow: 0 4px 12px rgba(0, 30, 60, 0.06);
             border: 1px solid var(--badge-border);
-            font-size: 0.95rem;
+            font-size: clamp(0.7rem, 1.4vw, 0.95rem);
             transition: all var(--transition);
             backdrop-filter: blur(4px);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .badge i {
-            margin-right: 8px;
+            margin-right: 4px;
         }
 
         /* ===== Experience Section ===== */
@@ -345,7 +358,7 @@
             background: var(--card-bg);
             backdrop-filter: blur(8px);
             border-radius: 26px;
-            padding: 30px;
+            padding: clamp(20px, 3vw, 30px);
             border: 1px solid var(--card-border);
             box-shadow: 0 10px 22px -16px rgba(0, 0, 0, 0.08);
             transition: all var(--transition);
@@ -360,13 +373,13 @@
 
         .experience-section h2 {
             color: var(--text-primary);
-            font-size: 1.6rem;
-            margin-bottom: 20px;
+            font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+            margin-bottom: 16px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             border-bottom: 2px solid var(--card-border);
-            padding-bottom: 14px;
+            padding-bottom: 12px;
         }
 
         .experience-section h2 i {
@@ -375,15 +388,19 @@
 
         .exp-item {
             display: flex;
-            gap: 20px;
+            gap: 18px;
             background: var(--card-bg);
             backdrop-filter: blur(8px);
             border: 1px solid var(--card-border);
             border-radius: 22px;
-            padding: 24px;
-            margin-bottom: 20px;
+            padding: clamp(16px, 2.5vw, 24px);
+            margin-bottom: 18px;
             box-shadow: 0 10px 22px -16px rgba(0, 0, 0, .08);
             transition: all .35s ease;
+        }
+
+        .exp-item:last-child {
+            margin-bottom: 0;
         }
 
         .exp-item:hover {
@@ -393,14 +410,14 @@
         }
 
         .exp-icon {
-            width: 56px;
-            height: 56px;
+            width: clamp(44px, 5vw, 56px);
+            height: clamp(44px, 5vw, 56px);
             background: var(--stat-icon-bg);
             border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.6rem;
+            font-size: clamp(1.2rem, 2vw, 1.6rem);
             color: var(--stat-icon-color);
             flex-shrink: 0;
             transition: all 0.3s ease;
@@ -412,44 +429,46 @@
 
         .exp-details {
             flex: 1;
+            min-width: 0;
         }
 
         .exp-details h3 {
             color: var(--text-primary);
-            font-size: 1.2rem;
-            margin-bottom: 4px;
+            font-size: clamp(1rem, 1.6vw, 1.2rem);
+            margin-bottom: 2px;
         }
 
         .exp-details .company {
             color: var(--stat-icon-color);
             font-weight: 500;
-            font-size: 1rem;
+            font-size: clamp(0.85rem, 1.2vw, 1rem);
         }
 
         .exp-details .date {
             color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin: 4px 0 10px;
+            font-size: clamp(0.75rem, 1.1vw, 0.9rem);
+            margin: 4px 0 8px;
         }
 
         .exp-details p {
             color: var(--text-secondary);
             line-height: 1.6;
+            font-size: clamp(0.85rem, 1.2vw, 0.95rem);
         }
 
         .tech-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 6px;
             margin-top: 10px;
         }
 
         .tech-tag {
             background: var(--tech-tag-bg);
             color: var(--tech-tag-color);
-            padding: 4px 14px;
+            padding: 3px 12px;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: clamp(0.7rem, 1vw, 0.8rem);
             font-weight: 500;
             transition: all 0.3s ease;
         }
@@ -459,14 +478,14 @@
             box-shadow: 0 4px 12px -6px rgba(0, 0, 0, 0.2);
         }
 
-        /* ===== Projects Grid ===== */
+        /* ===== Projects Section ===== */
         .projects-section h2 {
             color: var(--text-primary);
-            font-size: 1.6rem;
-            margin-bottom: 20px;
+            font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+            margin-bottom: 16px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .projects-section h2 i {
@@ -475,15 +494,15 @@
 
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
         }
 
         .project-card {
             background: var(--card-bg);
             backdrop-filter: blur(8px);
             border-radius: 26px;
-            padding: 28px;
+            padding: clamp(16px, 2.5vw, 28px);
             border: 1px solid var(--card-border);
             box-shadow: 0 10px 22px -16px rgba(0, 0, 0, 0.08);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -549,21 +568,22 @@
         .project-header {
             display: flex;
             align-items: center;
-            gap: 16px;
-            margin-bottom: 14px;
+            gap: 14px;
+            margin-bottom: 12px;
         }
 
         .project-icon {
-            width: 50px;
-            height: 50px;
+            width: clamp(44px, 4vw, 50px);
+            height: clamp(44px, 4vw, 50px);
             background: var(--stat-icon-bg);
             border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.6rem;
+            font-size: clamp(1.2rem, 2vw, 1.6rem);
             color: var(--stat-icon-color);
             transition: all 0.3s ease;
+            flex-shrink: 0;
         }
 
         .project-card:hover .project-icon {
@@ -572,36 +592,37 @@
 
         .project-card h3 {
             color: var(--text-primary);
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 1.5vw, 1.2rem);
             font-weight: 600;
         }
 
         .project-card p {
             color: var(--text-secondary);
-            font-size: 0.95rem;
+            font-size: clamp(0.8rem, 1.2vw, 0.95rem);
             line-height: 1.6;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
 
         .project-techs {
             display: flex;
             flex-wrap: wrap;
-            gap: 6px;
-            margin-bottom: 14px;
+            gap: 4px 8px;
+            margin-bottom: 12px;
         }
 
         .project-tech {
             background: var(--tech-tag-bg);
             color: var(--tech-tag-color);
-            padding: 3px 12px;
+            padding: 3px 10px;
             border-radius: 16px;
-            font-size: 0.75rem;
+            font-size: clamp(0.65rem, 1vw, 0.75rem);
             font-weight: 500;
         }
 
         .project-links {
             display: flex;
-            gap: 12px;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
         .project-link {
@@ -610,10 +631,10 @@
             gap: 6px;
             color: var(--stat-icon-color);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: clamp(0.8rem, 1.1vw, 0.9rem);
             font-weight: 500;
             transition: all 0.3s ease;
-            padding: 6px 14px;
+            padding: 5px 14px;
             border-radius: 20px;
             background: var(--stat-icon-bg);
         }
@@ -625,15 +646,40 @@
         }
 
         /* ===== Responsive ===== */
-        @media (max-width: 1000px) {
+        @media (max-width: 1024px) {
+            .top-bar {
+                padding: 14px 20px;
+                gap: 12px;
+            }
+
+            .nav-links {
+                flex: 1 1 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .dashboard {
+                border-radius: 28px;
+            }
+
             .top-bar {
                 flex-direction: column;
                 align-items: stretch;
-                gap: 16px;
+                gap: 12px;
+                padding: 14px 16px;
             }
 
             .top-profile {
                 text-align: center;
+            }
+
+            .top-profile .sub {
+                justify-content: center;
             }
 
             .nav-links {
@@ -645,44 +691,17 @@
             }
 
             .top-footer {
-                margin-left: 0;
                 justify-content: center;
+                margin-left: 0;
             }
 
             .theme-toggle {
                 align-self: center;
             }
-        }
-
-        @media (max-width: 600px) {
-            .top-bar {
-                padding: 16px 18px;
-            }
-
-            .top-profile h2 {
-                font-size: 1.5rem;
-            }
-
-            .nav-links a {
-                font-size: 0.85rem;
-                padding: 6px 12px;
-                gap: 6px;
-            }
-
-            .nav-links a i {
-                font-size: 0.9rem;
-            }
 
             .main {
-                padding: 20px 16px 26px;
-            }
-
-            .main-header h1 {
-                font-size: 1.7rem;
-            }
-
-            .experience-section {
-                padding: 20px;
+                padding: 18px 14px 22px;
+                gap: 18px;
             }
 
             .exp-item {
@@ -690,40 +709,131 @@
                 gap: 12px;
             }
 
-            .exp-icon {
-                width: 48px;
-                height: 48px;
-                font-size: 1.4rem;
-            }
-
-            .project-card {
-                padding: 20px;
-            }
-
             .projects-grid {
                 grid-template-columns: 1fr;
-            }
-
-            .badge {
-                font-size: 0.8rem;
-                padding: 6px 16px;
-            }
-
-            .theme-toggle {
-                font-size: 0.8rem;
-                padding: 6px 12px;
+                gap: 16px;
             }
         }
 
-        @media (max-width: 450px) {
+        @media (max-width: 480px) {
+            body {
+                padding: 6px;
+            }
+
+            .dashboard {
+                border-radius: 20px;
+            }
+
+            .top-bar {
+                padding: 10px 12px;
+                gap: 10px;
+            }
+
+            .top-profile h2 {
+                font-size: 1.3rem;
+            }
+
             .nav-links a {
+                font-size: 0.7rem;
+                padding: 5px 10px;
+                gap: 4px;
+            }
+
+            .nav-links a i {
                 font-size: 0.75rem;
-                padding: 4px 10px;
+            }
+
+            .main {
+                padding: 14px 10px 18px;
+                gap: 14px;
+            }
+
+            .main-header h1 {
+                font-size: 1.4rem;
+            }
+
+            .badge {
+                font-size: 0.7rem;
+                padding: 5px 12px;
+            }
+
+            .experience-section {
+                padding: 14px;
+                border-radius: 20px;
+            }
+
+            .experience-section h2 {
+                font-size: 1.1rem;
+            }
+
+            .exp-item {
+                padding: 14px;
+                border-radius: 18px;
+                gap: 10px;
+                margin-bottom: 14px;
+            }
+
+            .exp-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+                border-radius: 12px;
+            }
+
+            .exp-details h3 {
+                font-size: 0.95rem;
+            }
+
+            .exp-details .company {
+                font-size: 0.8rem;
+            }
+
+            .exp-details .date {
+                font-size: 0.7rem;
+            }
+
+            .exp-details p {
+                font-size: 0.8rem;
+            }
+
+            .tech-tag {
+                font-size: 0.65rem;
+                padding: 2px 10px;
+            }
+
+            .projects-section h2 {
+                font-size: 1.1rem;
+            }
+
+            .project-card {
+                padding: 14px;
+                border-radius: 20px;
             }
 
             .project-header {
-                flex-direction: column;
-                align-items: flex-start;
+                gap: 10px;
+                flex-wrap: wrap;
+            }
+
+            .project-icon {
+                width: 38px;
+                height: 38px;
+                font-size: 1rem;
+                border-radius: 10px;
+            }
+
+            .project-card h3 {
+                font-size: 0.95rem;
+            }
+
+            .project-card p {
+                font-size: 0.8rem;
+                margin-bottom: 10px;
+            }
+
+            .project-tech {
+                font-size: 0.6rem;
+                padding: 2px 8px;
             }
 
             .project-links {
@@ -733,6 +843,29 @@
 
             .project-link {
                 justify-content: center;
+                padding: 5px 12px;
+                font-size: 0.8rem;
+            }
+
+            .lang-badge {
+                font-size: 0.6rem;
+                padding: 3px 8px;
+            }
+
+            .theme-toggle {
+                font-size: 0.7rem;
+                padding: 4px 10px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .nav-links a {
+                font-size: 0.6rem;
+                padding: 4px 6px;
+            }
+
+            .exp-details p {
+                font-size: 0.75rem;
             }
         }
     </style>
@@ -746,16 +879,16 @@
         <div class="top-bar">
             <div class="top-profile">
                 <h2>Muhammad Muneeb Awan</h2>
-                <div class="sub"><i class="fas fa-laptop-code" style="margin-right:6px;"></i>BS General Computing · 2nd
+                <div class="sub"><i class="fas fa-laptop-code" style="margin-right:4px;"></i>BS General Computing · 2nd
                     Semester</div>
             </div>
 
-            <!-- Navigation with all pages -->
+            <!-- Navigation -->
             <ul class="nav-links">
-                <li><a href="index.html"><i class="fas fa-home"></i> Main</a></li>
-                <li><a href="contact.html"><i class="fas fa-address-book"></i> Contact</a></li>
-                <li><a href="missions.html"><i class="fas fa-bullseye"></i> Missions</a></li>
-                <li class="active"><a href="work.html"><i class="fas fa-briefcase"></i> Work</a></li>
+                <li><a href="#"><i class="fas fa-home"></i> Main</a></li>
+                <li><a href="#"><i class="fas fa-address-book"></i> Contact</a></li>
+                <li><a href="#"><i class="fas fa-bullseye"></i> Missions</a></li>
+                <li class="active"><a href="#"><i class="fas fa-briefcase"></i> Work</a></li>
             </ul>
 
             <!-- Tech badges -->
@@ -763,14 +896,14 @@
                 <span class="lang-label"><i class="fas fa-code"></i> Tech:</span>
                 <span class="lang-badge"><i class="fab fa-html5"></i> HTML</span>
                 <span class="lang-badge"><i class="fab fa-css3-alt"></i> CSS</span>
-                <span class="lang-badge"><i class="fab fa-js"></i> JavaScript</span>
+                <span class="lang-badge"><i class="fab fa-js"></i> JS</span>
                 <span class="lang-badge"><i class="fa-brands fa-flutter"></i> Flutter</span>
                 <span class="lang-badge"><i class="fas fa-vial"></i> Playwright</span>
                 <span class="lang-badge"><i class="fas fa-code"></i> C++</span>
             </div>
 
             <!-- Theme Toggle + Footer -->
-            <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+            <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:center;">
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                     <i class="fas fa-moon"></i> <span id="themeLabel">Dark</span>
                 </button>
@@ -786,7 +919,6 @@
                 <h1><i class="fas fa-briefcase"></i> Work</h1>
                 <span class="badge"><i class="fas fa-mobile-alt"></i> Flutter Developer · 5 Applications</span>
             </div>
-
 
             <!-- Experience Section -->
             <div class="experience-section">
@@ -821,34 +953,34 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="exp-item">
-                <div class="exp-icon"><i class="fas fa-graduation-cap"></i></div>
+                <div class="exp-item">
+                    <div class="exp-icon"><i class="fas fa-graduation-cap"></i></div>
 
-                <div class="exp-details">
-                    <h3>Flutter Application Developer</h3>
+                    <div class="exp-details">
+                        <h3>Flutter Application Developer</h3>
 
-                    <div class="company">PMAS ARID Agriculture University · Rawalpindi</div>
+                        <div class="company">PMAS ARID Agriculture University · Rawalpindi</div>
 
-                    <div class="date">
-                        <i class="far fa-calendar-alt"></i> 2026 - Present
-                    </div>
+                        <div class="date">
+                            <i class="far fa-calendar-alt"></i> 2026 - Present
+                        </div>
 
-                    <p>
-                        Pursuing a BS in General Computing while specializing in Flutter application development.
-                        Building modern Android applications, strengthening problem-solving skills, and gaining hands-on
-                        experience in mobile app architecture, UI/UX design, Firebase integration, REST APIs,
-                        and software engineering principles through academic and personal projects.
-                    </p>
+                        <p>
+                            Pursuing a BS in General Computing while specializing in Flutter application development.
+                            Building modern Android applications, strengthening problem-solving skills, and gaining hands-on
+                            experience in mobile app architecture, UI/UX design, Firebase integration, REST APIs,
+                            and software engineering principles through academic and personal projects.
+                        </p>
 
-                    <div class="tech-tags">
-                        <span class="tech-tag">Flutter</span>
-                        <span class="tech-tag">Dart</span>
-                        <span class="tech-tag">Firebase</span>
-                        <span class="tech-tag">REST API</span>
-                        <span class="tech-tag">OOP</span>
-                        <span class="tech-tag">Git</span>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">Dart</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">REST API</span>
+                            <span class="tech-tag">OOP</span>
+                            <span class="tech-tag">Git</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -986,41 +1118,42 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- ===== JavaScript: Theme Toggle ===== -->
-        <script>
-            (function () {
-                // Theme Toggle
-                const themeToggle = document.getElementById('themeToggle');
-                const themeLabel = document.getElementById('themeLabel');
-                const html = document.documentElement;
+    <!-- ===== JavaScript: Theme Toggle ===== -->
+    <script>
+        (function() {
+            // Theme Toggle
+            const themeToggle = document.getElementById('themeToggle');
+            const themeLabel = document.getElementById('themeLabel');
+            const html = document.documentElement;
 
-                let currentTheme = localStorage.getItem('theme') || 'light';
-                html.setAttribute('data-theme', currentTheme);
-                updateIcon(currentTheme);
+            let currentTheme = localStorage.getItem('theme') || 'light';
+            html.setAttribute('data-theme', currentTheme);
+            updateIcon(currentTheme);
 
-                themeToggle.addEventListener('click', function () {
-                    const newTheme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-                    html.setAttribute('data-theme', newTheme);
-                    localStorage.setItem('theme', newTheme);
-                    updateIcon(newTheme);
-                });
+            themeToggle.addEventListener('click', function() {
+                const newTheme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+                html.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateIcon(newTheme);
+            });
 
-                function updateIcon(theme) {
-                    const icon = themeToggle.querySelector('i');
-                    if (theme === 'dark') {
-                        icon.className = 'fas fa-sun';
-                        themeLabel.textContent = 'Light';
-                    } else {
-                        icon.className = 'fas fa-moon';
-                        themeLabel.textContent = 'Dark';
-                    }
+            function updateIcon(theme) {
+                const icon = themeToggle.querySelector('i');
+                if (theme === 'dark') {
+                    icon.className = 'fas fa-sun';
+                    themeLabel.textContent = 'Light';
+                } else {
+                    icon.className = 'fas fa-moon';
+                    themeLabel.textContent = 'Dark';
                 }
+            }
 
-                console.log('💼 Work page — Muhammad Muneeb Awan');
-                console.log('📁 Check out my projects and experience!');
-            })();
-        </script>
+            console.log('💼 Work page — Muhammad Muneeb Awan');
+            console.log('📁 Check out my projects and experience!');
+        })();
+    </script>
 
 </body>
 

@@ -3,12 +3,18 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Muhammad Rehan · Missions</title>
-    <!-- Font Awesome 6 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <title>Muhammad Muneeb Awan · Missions</title>
+    <!-- Font Awesome 7 (Free) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
     <style>
         /* ===== CSS Variables (themes) ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
             --bg-body: #eaf1f8;
             --bg-dashboard: rgba(255, 255, 255, 0.72);
@@ -38,6 +44,7 @@
             --progress-fill: #1e3a5f;
             --mission-border: #cde1f2;
             --icon-circle: #e5f0ff;
+            --border-subtle: rgba(255, 255, 255, 0.08);
         }
 
         [data-theme="dark"] {
@@ -68,13 +75,7 @@
             --progress-fill: #6db3f2;
             --mission-border: #2a4a6a;
             --icon-circle: #1a2d44;
-        }
-
-        /* ===== Reset & Base ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            --border-subtle: rgba(255, 255, 255, 0.05);
         }
 
         body {
@@ -84,8 +85,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 16px;
             transition: background var(--transition);
+            margin: 0;
         }
 
         /* ===== Dashboard ===== */
@@ -99,19 +101,19 @@
             box-shadow: var(--shadow);
             overflow: hidden;
             transition: all var(--transition);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border-subtle);
         }
 
         /* ===== Top Bar ===== */
         .top-bar {
             background: var(--bg-topbar);
             color: var(--text-light);
-            padding: 18px 32px;
+            padding: 16px 24px;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            gap: 18px 24px;
+            gap: 14px 20px;
             transition: background var(--transition);
             position: relative;
             overflow: hidden;
@@ -130,23 +132,28 @@
         }
 
         .top-profile h2 {
-            font-size: 1.8rem;
+            font-size: clamp(1.3rem, 5vw, 1.9rem);
             font-weight: 700;
             letter-spacing: -0.3px;
-            line-height: 1.1;
+            line-height: 1.2;
             background: linear-gradient(135deg, var(--gradient-start) 60%, var(--gradient-end));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            display: inline-block;
         }
 
         .top-profile .sub {
-            font-size: 0.9rem;
+            font-size: clamp(0.7rem, 2vw, 0.9rem);
             opacity: 0.85;
             margin-top: 2px;
             font-weight: 400;
             -webkit-text-fill-color: var(--text-light);
             color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex-wrap: wrap;
         }
 
         /* Navigation */
@@ -154,17 +161,19 @@
             display: flex;
             flex-wrap: wrap;
             list-style: none;
-            gap: 6px;
+            gap: 4px 6px;
+            justify-content: center;
+            flex: 1 1 auto;
         }
 
         .nav-links a {
             color: var(--nav-text);
             text-decoration: none;
-            font-size: 1.05rem;
+            font-size: clamp(0.75rem, 1.6vw, 1.05rem);
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 10px 20px;
+            gap: 6px;
+            padding: 8px 14px;
             border-radius: 40px;
             font-weight: 500;
             transition: all 0.3s ease;
@@ -174,7 +183,7 @@
         }
 
         .nav-links a i {
-            font-size: 1.1rem;
+            font-size: clamp(0.8rem, 1.4vw, 1.1rem);
         }
 
         .nav-links .active a {
@@ -194,16 +203,17 @@
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 10px 14px;
+            gap: 6px 10px;
+            justify-content: center;
         }
 
         .lang-label {
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: clamp(0.7rem, 1.2vw, 0.9rem);
             opacity: 0.9;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             color: var(--text-light);
         }
 
@@ -211,20 +221,20 @@
             background: var(--lang-bg);
             border: 1px solid var(--lang-border);
             color: var(--lang-color);
-            padding: 5px 16px;
+            padding: 4px 12px;
             border-radius: 40px;
-            font-size: 0.85rem;
+            font-size: clamp(0.65rem, 1.1vw, 0.85rem);
             font-weight: 500;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             transition: all 0.3s ease;
             white-space: nowrap;
             cursor: default;
         }
 
         .lang-badge i {
-            font-size: 1rem;
+            font-size: clamp(0.7rem, 1vw, 1rem);
             color: var(--lang-color);
         }
 
@@ -234,13 +244,12 @@
         }
 
         .top-footer {
-            font-size: 0.8rem;
+            font-size: clamp(0.65rem, 1.2vw, 0.8rem);
             opacity: 0.7;
             color: var(--text-light);
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin-left: auto;
+            gap: 6px;
         }
 
         /* ===== Theme Toggle ===== */
@@ -248,15 +257,16 @@
             background: rgba(255, 255, 255, 0.12);
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: white;
-            padding: 8px 16px;
+            padding: 6px 14px;
             border-radius: 40px;
             cursor: pointer;
-            font-size: 0.95rem;
+            font-size: clamp(0.7rem, 1.2vw, 0.95rem);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             transition: all 0.3s ease;
             backdrop-filter: blur(4px);
+            flex-shrink: 0;
         }
 
         .theme-toggle:hover {
@@ -265,16 +275,16 @@
         }
 
         .theme-toggle i {
-            font-size: 1.1rem;
+            font-size: clamp(0.8rem, 1.2vw, 1.1rem);
         }
 
         /* ===== Main Content ===== */
         .main {
             background: transparent;
-            padding: 28px 32px 32px;
+            padding: 24px 20px 28px;
             display: flex;
             flex-direction: column;
-            gap: 26px;
+            gap: 22px;
             animation: fadeInUp 0.6s ease;
         }
 
@@ -295,17 +305,17 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 10px 16px;
         }
 
         .main-header h1 {
-            font-size: 2.1rem;
+            font-size: clamp(1.5rem, 5vw, 2.2rem);
             font-weight: 700;
             color: var(--text-primary);
             transition: color var(--transition);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
         }
 
         .main-header h1 i {
@@ -321,25 +331,28 @@
             }
 
             50% {
-                transform: scale(1.1);
+                transform: scale(1.08);
             }
         }
 
         .badge {
             background: var(--badge-bg);
-            padding: 10px 24px;
+            padding: 8px 18px;
             border-radius: 40px;
             font-weight: 500;
             color: var(--text-primary);
             box-shadow: 0 4px 12px rgba(0, 30, 60, 0.06);
             border: 1px solid var(--badge-border);
-            font-size: 0.95rem;
+            font-size: clamp(0.7rem, 1.4vw, 0.95rem);
             transition: all var(--transition);
             backdrop-filter: blur(4px);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .badge i {
-            margin-right: 8px;
+            margin-right: 4px;
         }
 
         /* ===== Vision Section ===== */
@@ -347,7 +360,7 @@
             background: var(--card-bg);
             backdrop-filter: blur(8px);
             border-radius: 26px;
-            padding: 30px;
+            padding: clamp(20px, 3vw, 30px);
             border: 1px solid var(--card-border);
             box-shadow: 0 10px 22px -16px rgba(0, 0, 0, 0.08);
             transition: all var(--transition);
@@ -362,11 +375,11 @@
 
         .vision-section h2 {
             color: var(--text-primary);
-            font-size: 1.6rem;
-            margin-bottom: 16px;
+            font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+            margin-bottom: 14px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .vision-section h2 i {
@@ -374,10 +387,10 @@
         }
 
         .vision-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
+            font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+            line-height: 1.7;
             color: var(--text-secondary);
-            padding: 16px 20px;
+            padding: 14px 18px;
             background: var(--highlight-bg);
             border-radius: 16px;
             border-left: 4px solid var(--highlight-border);
@@ -385,21 +398,21 @@
 
         .vision-text i {
             color: var(--stat-icon-color);
-            margin-right: 8px;
+            margin-right: 6px;
         }
 
         /* ===== Missions Grid ===== */
         .missions-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
         }
 
         .mission-card {
             background: var(--card-bg);
             backdrop-filter: blur(8px);
             border-radius: 26px;
-            padding: 28px;
+            padding: clamp(18px, 2.5vw, 28px);
             border: 1px solid var(--card-border);
             box-shadow: 0 10px 22px -16px rgba(0, 0, 0, 0.08);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -467,16 +480,16 @@
         }
 
         .mission-icon {
-            width: 60px;
-            height: 60px;
+            width: clamp(48px, 5vw, 60px);
+            height: clamp(48px, 5vw, 60px);
             background: var(--icon-circle);
             border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: clamp(1.4rem, 2.5vw, 2rem);
             color: var(--stat-icon-color);
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             transition: all 0.3s ease;
         }
 
@@ -486,29 +499,29 @@
 
         .mission-card h3 {
             color: var(--text-primary);
-            font-size: 1.3rem;
-            margin-bottom: 10px;
+            font-size: clamp(1.1rem, 1.8vw, 1.3rem);
+            margin-bottom: 8px;
             font-weight: 600;
         }
 
         .mission-card p {
             color: var(--text-secondary);
-            font-size: 1rem;
+            font-size: clamp(0.85rem, 1.2vw, 1rem);
             line-height: 1.6;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
         .progress-container {
-            margin-top: 12px;
+            margin-top: 10px;
         }
 
         .progress-label {
             display: flex;
             justify-content: space-between;
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: clamp(0.75rem, 1.1vw, 0.9rem);
             font-weight: 500;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .progress-bar {
@@ -552,25 +565,55 @@
 
         .mission-tag {
             display: inline-block;
-            padding: 4px 14px;
+            padding: 4px 12px;
             background: var(--stat-icon-bg);
             color: var(--stat-icon-color);
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: clamp(0.7rem, 1vw, 0.8rem);
             font-weight: 500;
-            margin-top: 12px;
+            margin-top: 10px;
         }
 
         /* ===== Responsive ===== */
-        @media (max-width: 1000px) {
+        @media (max-width: 1024px) {
+            .top-bar {
+                padding: 14px 20px;
+                gap: 12px;
+            }
+
+            .nav-links {
+                flex: 1 1 100%;
+                justify-content: center;
+            }
+
+            .missions-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 18px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .dashboard {
+                border-radius: 28px;
+            }
+
             .top-bar {
                 flex-direction: column;
                 align-items: stretch;
-                gap: 16px;
+                gap: 12px;
+                padding: 14px 16px;
             }
 
             .top-profile {
                 text-align: center;
+            }
+
+            .top-profile .sub {
+                justify-content: center;
             }
 
             .nav-links {
@@ -582,80 +625,147 @@
             }
 
             .top-footer {
-                margin-left: 0;
                 justify-content: center;
+                margin-left: 0;
             }
 
             .theme-toggle {
                 align-self: center;
             }
-        }
-
-        @media (max-width: 600px) {
-            .top-bar {
-                padding: 16px 18px;
-            }
-
-            .top-profile h2 {
-                font-size: 1.5rem;
-            }
-
-            .nav-links a {
-                font-size: 0.85rem;
-                padding: 6px 12px;
-                gap: 6px;
-            }
-
-            .nav-links a i {
-                font-size: 0.9rem;
-            }
 
             .main {
-                padding: 20px 16px 26px;
-            }
-
-            .main-header h1 {
-                font-size: 1.7rem;
-            }
-
-            .vision-section {
-                padding: 20px;
-            }
-
-            .vision-text {
-                font-size: 1rem;
-                padding: 12px 16px;
-            }
-
-            .mission-card {
-                padding: 20px;
+                padding: 18px 14px 22px;
+                gap: 18px;
             }
 
             .missions-grid {
                 grid-template-columns: 1fr;
+                gap: 16px;
             }
 
-            .badge {
-                font-size: 0.8rem;
-                padding: 6px 16px;
+            .vision-section {
+                padding: 18px;
             }
 
-            .theme-toggle {
-                font-size: 0.8rem;
-                padding: 6px 12px;
+            .vision-text {
+                padding: 12px 14px;
+                font-size: 0.95rem;
             }
         }
 
-        @media (max-width: 450px) {
+        @media (max-width: 480px) {
+            body {
+                padding: 6px;
+            }
+
+            .dashboard {
+                border-radius: 20px;
+            }
+
+            .top-bar {
+                padding: 10px 12px;
+                gap: 10px;
+            }
+
+            .top-profile h2 {
+                font-size: 1.3rem;
+            }
+
             .nav-links a {
+                font-size: 0.7rem;
+                padding: 5px 10px;
+                gap: 4px;
+            }
+
+            .nav-links a i {
                 font-size: 0.75rem;
-                padding: 4px 10px;
+            }
+
+            .main {
+                padding: 14px 10px 18px;
+                gap: 14px;
+            }
+
+            .main-header h1 {
+                font-size: 1.4rem;
+            }
+
+            .badge {
+                font-size: 0.7rem;
+                padding: 5px 12px;
+            }
+
+            .vision-section {
+                padding: 14px;
+                border-radius: 20px;
+            }
+
+            .vision-section h2 {
+                font-size: 1.1rem;
+                margin-bottom: 10px;
+            }
+
+            .vision-text {
+                font-size: 0.85rem;
+                padding: 10px 12px;
+                border-left-width: 3px;
+            }
+
+            .mission-card {
+                padding: 14px;
+                border-radius: 20px;
             }
 
             .mission-icon {
-                width: 48px;
-                height: 48px;
-                font-size: 1.5rem;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+                border-radius: 14px;
+                margin-bottom: 10px;
+            }
+
+            .mission-card h3 {
+                font-size: 1rem;
+            }
+
+            .mission-card p {
+                font-size: 0.8rem;
+                margin-bottom: 10px;
+            }
+
+            .progress-label {
+                font-size: 0.7rem;
+            }
+
+            .progress-bar {
+                height: 6px;
+            }
+
+            .mission-tag {
+                font-size: 0.65rem;
+                padding: 3px 10px;
+                margin-top: 8px;
+            }
+
+            .lang-badge {
+                font-size: 0.6rem;
+                padding: 3px 8px;
+            }
+
+            .theme-toggle {
+                font-size: 0.7rem;
+                padding: 4px 10px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .nav-links a {
+                font-size: 0.6rem;
+                padding: 4px 6px;
+            }
+
+            .mission-card p {
+                font-size: 0.75rem;
             }
         }
     </style>
@@ -669,16 +779,16 @@
         <div class="top-bar">
             <div class="top-profile">
                 <h2>Muhammad Muneeb Awan</h2>
-                <div class="sub"><i class="fas fa-laptop-code" style="margin-right:6px;"></i>BS General Computing · 2nd
+                <div class="sub"><i class="fas fa-laptop-code" style="margin-right:4px;"></i>BS General Computing · 2nd
                     Semester</div>
             </div>
 
-            <!-- Navigation with all pages -->
+            <!-- Navigation -->
             <ul class="nav-links">
-                <li><a href="index.html"><i class="fas fa-home"></i> Main</a></li>
-                <li><a href="contact.html"><i class="fas fa-address-book"></i> Contact</a></li>
-                <li class="active"><a href="missions.html"><i class="fas fa-bullseye"></i> Missions</a></li>
-                <li><a href="work.html"><i class="fas fa-briefcase"></i> Work</a></li>
+                <li><a href="#"><i class="fas fa-home"></i> Main</a></li>
+                <li><a href="#"><i class="fas fa-address-book"></i> Contact</a></li>
+                <li class="active"><a href="#"><i class="fas fa-bullseye"></i> Missions</a></li>
+                <li><a href="#"><i class="fas fa-briefcase"></i> Work</a></li>
             </ul>
 
             <!-- Tech badges -->
@@ -686,14 +796,14 @@
                 <span class="lang-label"><i class="fas fa-code"></i> Tech:</span>
                 <span class="lang-badge"><i class="fab fa-html5"></i> HTML</span>
                 <span class="lang-badge"><i class="fab fa-css3-alt"></i> CSS</span>
-                <span class="lang-badge"><i class="fab fa-js"></i> JavaScript</span>
+                <span class="lang-badge"><i class="fab fa-js"></i> JS</span>
                 <span class="lang-badge"><i class="fa-brands fa-flutter"></i> Flutter</span>
                 <span class="lang-badge"><i class="fas fa-vial"></i> Playwright</span>
                 <span class="lang-badge"><i class="fas fa-code"></i> C++</span>
             </div>
 
             <!-- Theme Toggle + Footer -->
-            <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+            <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:center;">
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                     <i class="fas fa-moon"></i> <span id="themeLabel">Dark</span>
                 </button>
@@ -715,7 +825,7 @@
                 <h2><i class="fas fa-eye"></i> My Vision</h2>
                 <div class="vision-text">
                     <i class="fas fa-quote-left"></i>
-                    To become a <strong> Application Developer</strong> who builds impactful,
+                    To become a <strong>Application Developer</strong> who builds impactful,
                     user-centric applications that solve real-world problems. I aim to continuously
                     learn, innovate, and contribute to the tech community while maintaining academic
                     excellence and professional growth.
@@ -850,7 +960,7 @@
 
     <!-- ===== JavaScript: Theme Toggle & Progress Bars ===== -->
     <script>
-        (function () {
+        (function() {
             // Theme Toggle
             const themeToggle = document.getElementById('themeToggle');
             const themeLabel = document.getElementById('themeLabel');
@@ -860,7 +970,7 @@
             html.setAttribute('data-theme', currentTheme);
             updateIcon(currentTheme);
 
-            themeToggle.addEventListener('click', function () {
+            themeToggle.addEventListener('click', function() {
                 const newTheme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
                 html.setAttribute('data-theme', newTheme);
                 localStorage.setItem('theme', newTheme);
@@ -892,7 +1002,7 @@
             // Call on load
             window.addEventListener('load', animateProgressBars);
 
-            console.log('🎯 Missions page — Muhammad Rehan');
+            console.log('🎯 Missions page — Muhammad Muneeb Awan');
             console.log('💡 Progress bars animate on load!');
         })();
     </script>

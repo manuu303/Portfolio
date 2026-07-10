@@ -2,12 +2,18 @@
 <html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     <title>Muhammad Muneeb Awan · Contact</title>
-    <!-- Font Awesome 6 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <!-- Font Awesome 7 (Free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"/>
     <style>
         /* ===== CSS Variables (themes) ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
             --bg-body: #eaf1f8;
             --bg-dashboard: rgba(255, 255, 255, 0.72);
@@ -37,6 +43,7 @@
             --input-border: #cde1f2;
             --input-text: #132e48;
             --social-hover: #1e3a5f;
+            --border-subtle: rgba(255, 255, 255, 0.08);
         }
 
         [data-theme="dark"] {
@@ -67,13 +74,7 @@
             --input-border: #2a4a6a;
             --input-text: #e8f0fe;
             --social-hover: #6db3f2;
-        }
-
-        /* ===== Reset & Base ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            --border-subtle: rgba(255, 255, 255, 0.05);
         }
 
         body {
@@ -83,8 +84,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 16px;
             transition: background var(--transition);
+            margin: 0;
         }
 
         /* ===== Dashboard ===== */
@@ -98,19 +100,19 @@
             box-shadow: var(--shadow);
             overflow: hidden;
             transition: all var(--transition);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border-subtle);
         }
 
         /* ===== Top Bar ===== */
         .top-bar {
             background: var(--bg-topbar);
             color: var(--text-light);
-            padding: 18px 32px;
+            padding: 16px 24px;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            gap: 18px 24px;
+            gap: 14px 20px;
             transition: background var(--transition);
             position: relative;
             overflow: hidden;
@@ -128,22 +130,27 @@
         }
 
         .top-profile h2 {
-            font-size: 1.8rem;
+            font-size: clamp(1.3rem, 5vw, 1.9rem);
             font-weight: 700;
             letter-spacing: -0.3px;
-            line-height: 1.1;
+            line-height: 1.2;
             background: linear-gradient(135deg, var(--gradient-start) 60%, var(--gradient-end));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            display: inline-block;
         }
         .top-profile .sub {
-            font-size: 0.9rem;
+            font-size: clamp(0.7rem, 2vw, 0.9rem);
             opacity: 0.85;
             margin-top: 2px;
             font-weight: 400;
             -webkit-text-fill-color: var(--text-light);
             color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex-wrap: wrap;
         }
 
         /* Navigation */
@@ -151,16 +158,18 @@
             display: flex;
             flex-wrap: wrap;
             list-style: none;
-            gap: 6px;
+            gap: 4px 6px;
+            justify-content: center;
+            flex: 1 1 auto;
         }
         .nav-links a {
             color: var(--nav-text);
             text-decoration: none;
-            font-size: 1.05rem;
+            font-size: clamp(0.75rem, 1.6vw, 1.05rem);
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 10px 20px;
+            gap: 6px;
+            padding: 8px 14px;
             border-radius: 40px;
             font-weight: 500;
             transition: all 0.3s ease;
@@ -169,7 +178,7 @@
             position: relative;
         }
         .nav-links a i {
-            font-size: 1.1rem;
+            font-size: clamp(0.8rem, 1.4vw, 1.1rem);
         }
         .nav-links .active a {
             background: var(--nav-active);
@@ -187,34 +196,35 @@
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 10px 14px;
+            gap: 6px 10px;
+            justify-content: center;
         }
         .lang-label {
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: clamp(0.7rem, 1.2vw, 0.9rem);
             opacity: 0.9;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             color: var(--text-light);
         }
         .lang-badge {
             background: var(--lang-bg);
             border: 1px solid var(--lang-border);
             color: var(--lang-color);
-            padding: 5px 16px;
+            padding: 4px 12px;
             border-radius: 40px;
-            font-size: 0.85rem;
+            font-size: clamp(0.65rem, 1.1vw, 0.85rem);
             font-weight: 500;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             transition: all 0.3s ease;
             white-space: nowrap;
             cursor: default;
         }
         .lang-badge i {
-            font-size: 1rem;
+            font-size: clamp(0.7rem, 1vw, 1rem);
             color: var(--lang-color);
         }
         .lang-badge:hover {
@@ -223,13 +233,12 @@
         }
 
         .top-footer {
-            font-size: 0.8rem;
+            font-size: clamp(0.65rem, 1.2vw, 0.8rem);
             opacity: 0.7;
             color: var(--text-light);
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin-left: auto;
+            gap: 6px;
         }
 
         /* ===== Theme Toggle ===== */
@@ -237,31 +246,32 @@
             background: rgba(255, 255, 255, 0.12);
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: white;
-            padding: 8px 16px;
+            padding: 6px 14px;
             border-radius: 40px;
             cursor: pointer;
-            font-size: 0.95rem;
+            font-size: clamp(0.7rem, 1.2vw, 0.95rem);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             transition: all 0.3s ease;
             backdrop-filter: blur(4px);
+            flex-shrink: 0;
         }
         .theme-toggle:hover {
             background: rgba(255, 255, 255, 0.25);
             transform: scale(1.05);
         }
         .theme-toggle i {
-            font-size: 1.1rem;
+            font-size: clamp(0.8rem, 1.2vw, 1.1rem);
         }
 
         /* ===== Main Content ===== */
         .main {
             background: transparent;
-            padding: 28px 32px 32px;
+            padding: 24px 20px 28px;
             display: flex;
             flex-direction: column;
-            gap: 26px;
+            gap: 22px;
             animation: fadeInUp 0.6s ease;
         }
 
@@ -281,16 +291,16 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 10px 16px;
         }
         .main-header h1 {
-            font-size: 2.1rem;
+            font-size: clamp(1.5rem, 5vw, 2.2rem);
             font-weight: 700;
             color: var(--text-primary);
             transition: color var(--transition);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
         }
         .main-header h1 i {
             color: var(--stat-icon-color);
@@ -302,24 +312,27 @@
                 transform: scale(1);
             }
             50% {
-                transform: scale(1.1);
+                transform: scale(1.08);
             }
         }
 
         .badge {
             background: var(--badge-bg);
-            padding: 10px 24px;
+            padding: 8px 18px;
             border-radius: 40px;
             font-weight: 500;
             color: var(--text-primary);
             box-shadow: 0 4px 12px rgba(0, 30, 60, 0.06);
             border: 1px solid var(--badge-border);
-            font-size: 0.95rem;
+            font-size: clamp(0.7rem, 1.4vw, 0.95rem);
             transition: all var(--transition);
             backdrop-filter: blur(4px);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
         .badge i {
-            margin-right: 8px;
+            margin-right: 4px;
         }
 
         /* ===== Contact Grid ===== */
@@ -334,7 +347,7 @@
             background: var(--card-bg);
             backdrop-filter: blur(8px);
             border-radius: 26px;
-            padding: 30px;
+            padding: clamp(20px, 3vw, 30px);
             border: 1px solid var(--card-border);
             box-shadow: 0 10px 22px -16px rgba(0, 0, 0, 0.08);
             transition: all var(--transition);
@@ -348,13 +361,13 @@
 
         .contact-info h2 {
             color: var(--text-primary);
-            font-size: 1.6rem;
-            margin-bottom: 20px;
+            font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+            margin-bottom: 16px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             border-bottom: 2px solid var(--card-border);
-            padding-bottom: 14px;
+            padding-bottom: 12px;
         }
         .contact-info h2 i {
             color: var(--stat-icon-color);
@@ -363,8 +376,8 @@
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 16px;
-            padding: 14px 0;
+            gap: 14px;
+            padding: 12px 0;
             border-bottom: 1px solid var(--card-border);
             transition: all 0.3s ease;
         }
@@ -372,40 +385,43 @@
             border-bottom: none;
         }
         .contact-item:hover {
-            transform: translateX(6px);
+            transform: translateX(4px);
         }
         .contact-item i {
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             background: var(--stat-icon-bg);
             border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3rem;
+            font-size: clamp(1rem, 1.6vw, 1.3rem);
             color: var(--stat-icon-color);
             flex-shrink: 0;
             transition: all 0.3s ease;
         }
         .contact-item:hover i {
-            transform: scale(1.1) rotate(4deg);
+            transform: scale(1.08) rotate(3deg);
         }
         .contact-item .info {
             flex: 1;
+            min-width: 0;
         }
         .contact-item .info h4 {
             color: var(--text-primary);
-            font-size: 0.9rem;
+            font-size: clamp(0.75rem, 1.2vw, 0.9rem);
             font-weight: 600;
         }
         .contact-item .info p {
             color: var(--text-secondary);
-            font-size: 0.95rem;
+            font-size: clamp(0.8rem, 1.2vw, 0.95rem);
+            word-break: break-word;
         }
         .contact-item .info a {
             color: var(--stat-icon-color);
             text-decoration: none;
             transition: color 0.3s ease;
+            word-break: break-all;
         }
         .contact-item .info a:hover {
             color: var(--text-primary);
@@ -414,22 +430,22 @@
 
         /* Social Links */
         .social-links {
-            margin-top: 20px;
+            margin-top: 18px;
             display: flex;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
         }
         .social-link {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            padding: 10px 20px;
+            gap: 8px;
+            padding: 8px 16px;
             background: var(--stat-icon-bg);
             border-radius: 40px;
             color: var(--stat-icon-color);
             text-decoration: none;
             font-weight: 500;
-            font-size: 0.95rem;
+            font-size: clamp(0.8rem, 1.2vw, 0.95rem);
             transition: all 0.3s ease;
             border: 1px solid var(--card-border);
         }
@@ -440,7 +456,7 @@
             box-shadow: 0 8px 20px -12px rgba(0, 0, 0, 0.3);
         }
         .social-link i {
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 1.4vw, 1.2rem);
         }
 
         /* Contact Form */
@@ -448,7 +464,7 @@
             background: var(--card-bg);
             backdrop-filter: blur(8px);
             border-radius: 26px;
-            padding: 30px;
+            padding: clamp(20px, 3vw, 30px);
             border: 1px solid var(--card-border);
             box-shadow: 0 10px 22px -16px rgba(0, 0, 0, 0.08);
             transition: all var(--transition);
@@ -462,37 +478,37 @@
 
         .contact-form h2 {
             color: var(--text-primary);
-            font-size: 1.6rem;
-            margin-bottom: 20px;
+            font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+            margin-bottom: 16px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             border-bottom: 2px solid var(--card-border);
-            padding-bottom: 14px;
+            padding-bottom: 12px;
         }
         .contact-form h2 i {
             color: var(--stat-icon-color);
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
         .form-group label {
             display: block;
             color: var(--text-primary);
             font-weight: 500;
-            margin-bottom: 6px;
-            font-size: 0.95rem;
+            margin-bottom: 4px;
+            font-size: clamp(0.8rem, 1.2vw, 0.95rem);
         }
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 12px 16px;
+            padding: 10px 14px;
             background: var(--input-bg);
             border: 1px solid var(--input-border);
             border-radius: 14px;
             color: var(--input-text);
-            font-size: 1rem;
+            font-size: clamp(0.9rem, 1.2vw, 1rem);
             transition: all 0.3s ease;
             font-family: inherit;
         }
@@ -504,22 +520,24 @@
         }
         .form-group textarea {
             resize: vertical;
-            min-height: 120px;
+            min-height: 100px;
         }
 
         .submit-btn {
             background: var(--bg-topbar);
             color: white;
             border: none;
-            padding: 14px 32px;
+            padding: 12px 28px;
             border-radius: 40px;
-            font-size: 1.05rem;
+            font-size: clamp(0.9rem, 1.2vw, 1.05rem);
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            width: 100%;
+            justify-content: center;
         }
         .submit-btn:hover {
             transform: translateY(-3px);
@@ -532,20 +550,21 @@
 
         .form-success {
             display: none;
-            padding: 14px 20px;
+            padding: 12px 16px;
             background: var(--highlight-bg);
             border-radius: 14px;
             border-left: 4px solid #4CAF50;
             color: var(--text-secondary);
-            margin-top: 16px;
+            margin-top: 14px;
             animation: fadeInUp 0.4s ease;
+            font-size: clamp(0.85rem, 1.2vw, 0.95rem);
         }
         .form-success.show {
             display: block;
         }
         .form-success i {
             color: #4CAF50;
-            margin-right: 10px;
+            margin-right: 8px;
         }
 
         @keyframes slideUp {
@@ -560,14 +579,39 @@
         }
 
         /* ===== Responsive ===== */
-        @media (max-width: 1000px) {
+        @media (max-width: 1024px) {
+            .top-bar {
+                padding: 14px 20px;
+                gap: 12px;
+            }
+            .nav-links {
+                flex: 1 1 100%;
+                justify-content: center;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            .dashboard {
+                border-radius: 28px;
+            }
             .top-bar {
                 flex-direction: column;
                 align-items: stretch;
-                gap: 16px;
+                gap: 12px;
+                padding: 14px 16px;
             }
             .top-profile {
                 text-align: center;
+            }
+            .top-profile .sub {
+                justify-content: center;
             }
             .nav-links {
                 justify-content: center;
@@ -576,70 +620,145 @@
                 justify-content: center;
             }
             .top-footer {
-                margin-left: 0;
                 justify-content: center;
+                margin-left: 0;
             }
             .theme-toggle {
                 align-self: center;
             }
+            .main {
+                padding: 18px 14px 22px;
+                gap: 18px;
+            }
             .contact-grid {
                 grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .top-bar {
-                padding: 16px 18px;
-            }
-            .top-profile h2 {
-                font-size: 1.5rem;
-            }
-            .nav-links a {
-                font-size: 0.85rem;
-                padding: 6px 12px;
-                gap: 6px;
-            }
-            .nav-links a i {
-                font-size: 0.9rem;
-            }
-            .main {
-                padding: 20px 16px 26px;
-            }
-            .main-header h1 {
-                font-size: 1.7rem;
+                gap: 18px;
             }
             .contact-info,
             .contact-form {
-                padding: 20px;
+                padding: 18px;
             }
-            .contact-item {
-                padding: 12px 0;
+            .social-links {
+                justify-content: center;
             }
             .social-link {
-                padding: 8px 16px;
+                padding: 6px 14px;
                 font-size: 0.85rem;
-            }
-            .badge {
-                font-size: 0.8rem;
-                padding: 6px 16px;
-            }
-            .theme-toggle {
-                font-size: 0.8rem;
-                padding: 6px 12px;
             }
         }
 
-        @media (max-width: 450px) {
+        @media (max-width: 480px) {
+            body {
+                padding: 6px;
+            }
+            .dashboard {
+                border-radius: 20px;
+            }
+            .top-bar {
+                padding: 10px 12px;
+                gap: 10px;
+            }
+            .top-profile h2 {
+                font-size: 1.3rem;
+            }
             .nav-links a {
+                font-size: 0.7rem;
+                padding: 5px 10px;
+                gap: 4px;
+            }
+            .nav-links a i {
                 font-size: 0.75rem;
-                padding: 4px 10px;
+            }
+            .main {
+                padding: 14px 10px 18px;
+                gap: 14px;
+            }
+            .main-header h1 {
+                font-size: 1.4rem;
+            }
+            .badge {
+                font-size: 0.7rem;
+                padding: 5px 12px;
+            }
+            .contact-info,
+            .contact-form {
+                padding: 14px;
+                border-radius: 20px;
+            }
+            .contact-info h2,
+            .contact-form h2 {
+                font-size: 1.1rem;
+                margin-bottom: 12px;
+                padding-bottom: 10px;
+            }
+            .contact-item {
+                padding: 10px 0;
+                gap: 10px;
+            }
+            .contact-item i {
+                width: 34px;
+                height: 34px;
+                font-size: 0.9rem;
+                border-radius: 10px;
+            }
+            .contact-item .info p {
+                font-size: 0.8rem;
+            }
+            .contact-item .info h4 {
+                font-size: 0.75rem;
             }
             .social-links {
-                gap: 8px;
+                gap: 6px;
             }
             .social-link {
-                padding: 6px 12px;
+                padding: 5px 10px;
+                font-size: 0.75rem;
+                gap: 4px;
+            }
+            .social-link i {
+                font-size: 0.85rem;
+            }
+            .form-group {
+                margin-bottom: 12px;
+            }
+            .form-group input,
+            .form-group textarea {
+                padding: 8px 12px;
+                font-size: 0.85rem;
+                border-radius: 10px;
+            }
+            .form-group textarea {
+                min-height: 80px;
+            }
+            .submit-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            .lang-badge {
+                font-size: 0.6rem;
+                padding: 3px 8px;
+            }
+            .theme-toggle {
+                font-size: 0.7rem;
+                padding: 4px 10px;
+            }
+            .form-success {
                 font-size: 0.8rem;
+                padding: 10px 12px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .nav-links a {
+                font-size: 0.6rem;
+                padding: 4px 6px;
+            }
+            .contact-item .info p {
+                font-size: 0.7rem;
+            }
+            .social-link {
+                font-size: 0.65rem;
+                padding: 4px 8px;
             }
         }
     </style>
@@ -652,15 +771,15 @@
         <div class="top-bar">
             <div class="top-profile">
                 <h2>Muhammad Muneeb Awan</h2>
-                <div class="sub"><i class="fas fa-laptop-code" style="margin-right:6px;"></i>BS Genral Computing · 2nd Semester</div>
+                <div class="sub"><i class="fas fa-laptop-code" style="margin-right:4px;"></i>BS General Computing · 2nd Semester</div>
             </div>
 
-            <!-- Navigation with all pages -->
+            <!-- Navigation -->
             <ul class="nav-links">
-                <li><a href="index.html"><i class="fas fa-home"></i> Main</a></li>
-                <li class="active"><a href="contact.html"><i class="fas fa-address-book"></i> Contact</a></li>
-                <li><a href="missions.html"><i class="fas fa-bullseye"></i> Missions</a></li>
-                <li><a href="work.html"><i class="fas fa-briefcase"></i> Work</a></li>
+                <li><a href="#"><i class="fas fa-home"></i> Main</a></li>
+                <li class="active"><a href="#"><i class="fas fa-address-book"></i> Contact</a></li>
+                <li><a href="#"><i class="fas fa-bullseye"></i> Missions</a></li>
+                <li><a href="#"><i class="fas fa-briefcase"></i> Work</a></li>
             </ul>
 
             <!-- Tech badges -->
@@ -668,14 +787,14 @@
                 <span class="lang-label"><i class="fas fa-code"></i> Tech:</span>
                 <span class="lang-badge"><i class="fab fa-html5"></i> HTML</span>
                 <span class="lang-badge"><i class="fab fa-css3-alt"></i> CSS</span>
-                <span class="lang-badge"><i class="fab fa-js"></i> JavaScript</span>
+                <span class="lang-badge"><i class="fab fa-js"></i> JS</span>
                 <span class="lang-badge"><i class="fa-brands fa-flutter"></i> Flutter</span>
                 <span class="lang-badge"><i class="fas fa-vial"></i> Playwright</span>
                 <span class="lang-badge"><i class="fas fa-code"></i> C++</span>
             </div>
 
             <!-- Theme Toggle + Footer -->
-            <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+            <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:center;">
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                     <i class="fas fa-moon"></i> <span id="themeLabel">Dark</span>
                 </button>
@@ -822,7 +941,7 @@
                 }, 3000);
             });
 
-            console.log('📬 Contact page — Muhammad Rehan');
+            console.log('📬 Contact page — Muhammad Muneeb Awan');
             console.log('💡 Fill out the form and click send to see the success message!');
         })();
     </script>
