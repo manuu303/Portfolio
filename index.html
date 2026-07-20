@@ -6,6 +6,8 @@
     <title>Muhammad Muneeb Awan · Dashboard</title>
     <!-- Font Awesome 7 (Free) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <!-- Bootstrap 5 (Grid System + utilities, used for layout/responsiveness) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
     <style>
         /* ===== CSS Variables (themes) ===== */
         * {
@@ -95,7 +97,11 @@
             border: 1px solid var(--border-subtle);
         }
 
-        /* ===== Top Bar ===== */
+        /* =============================================================
+           TOP BAR
+           Layout matches contact.html exactly:
+           [ profile ] [ nav-links (centered, grows) ] [ tech badges (centered) ] [ theme toggle + year (pushed right) ]
+        ============================================================= */
         .top-bar {
             background: var(--bg-topbar);
             color: var(--text-light);
@@ -145,13 +151,13 @@
             flex-wrap: wrap;
         }
 
-        /* Navigation */
+        /* Navigation — centered between profile and tech badges, same as contact.html */
         .nav-links {
             display: flex;
             flex-wrap: wrap;
             list-style: none;
             gap: 4px 6px;
-            justify-content: center;
+            justify-content: right;
             flex: 1 1 auto;
         }
         .nav-links a {
@@ -183,7 +189,7 @@
             transform: translateY(-2px);
         }
 
-        /* Tech badges */
+        /* Tech badges — centered, same as contact.html */
         .lang-section {
             display: flex;
             flex-wrap: wrap;
@@ -222,6 +228,16 @@
         .lang-badge:hover {
             transform: translateY(-3px) scale(1.05);
             box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Theme toggle + year group — pushed to the far right, same as contact.html */
+        .top-actions {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
         }
 
         .top-footer {
@@ -316,12 +332,7 @@
             margin-right: 4px;
         }
 
-        /* Stats Grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 16px;
-        }
+        /* Stat cards — grid handled by Bootstrap row/col, this styles each card only */
         .stat-card {
             background: var(--card-bg);
             backdrop-filter: blur(8px);
@@ -335,6 +346,7 @@
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: default;
             animation: slideUp 0.6s ease backwards;
+            height: 100%;
         }
         .stat-card:nth-child(1) { animation-delay: 0.1s; }
         .stat-card:nth-child(2) { animation-delay: 0.2s; }
@@ -383,12 +395,7 @@
             transition: color var(--transition);
         }
 
-        /* Content Cards */
-        .content-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px;
-        }
+        /* Content cards — grid handled by Bootstrap row/col, this styles each card only */
         .info-card {
             background: var(--card-bg);
             backdrop-filter: blur(8px);
@@ -399,6 +406,7 @@
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             animation: slideUp 0.6s ease backwards;
             animation-delay: 0.5s;
+            height: 100%;
         }
         .info-card:hover {
             transform: translateY(-5px);
@@ -490,7 +498,9 @@
             margin-right: 8px;
         }
 
-        /* ===== Responsive Fine-Tuning ===== */
+        /* ===== Responsive Fine-Tuning =====
+           Breakpoints mirror contact.html so the top bar behaves identically
+           on every screen size. */
         @media (max-width: 1024px) {
             .top-bar {
                 padding: 14px 20px;
@@ -515,11 +525,10 @@
             .top-profile .sub { justify-content: center; }
             .nav-links { justify-content: center; }
             .lang-section { justify-content: center; }
-            .top-footer { justify-content: center; margin-left: 0; }
+            .top-actions { margin-left: 0; justify-content: center; }
+            .top-footer { justify-content: center; }
             .theme-toggle { align-self: center; }
             .main { padding: 18px 14px 22px; gap: 18px; }
-            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-            .content-cards { grid-template-columns: 1fr; }
             .stat-card { padding: 14px; }
         }
 
@@ -533,7 +542,6 @@
             .main { padding: 14px 10px 18px; gap: 14px; }
             .main-header h1 { font-size: 1.4rem; }
             .badge { font-size: 0.7rem; padding: 5px 12px; }
-            .stats-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
             .stat-card { padding: 10px; border-radius: 18px; gap: 8px; }
             .stat-icon { width: 40px; height: 40px; font-size: 1.2rem; border-radius: 14px; }
             .stat-info h3 { font-size: 1.2rem; }
@@ -548,18 +556,20 @@
         }
 
         @media (max-width: 380px) {
-            .stats-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
             .stat-card { flex-direction: column; align-items: center; text-align: center; padding: 10px 6px; }
             .stat-icon { margin-bottom: 4px; }
             .nav-links a { font-size: 0.6rem; padding: 4px 6px; }
         }
+
+        /* Prevent any accidental horizontal scroll from Bootstrap's row gutters */
+        html, body { max-width: 100%; overflow-x: hidden; }
     </style>
 </head>
 <body>
 
 <div class="dashboard">
 
-    <!-- TOP BAR -->
+    <!-- TOP BAR (structure/order matches contact.html) -->
     <div class="top-bar">
         <div class="top-profile">
             <h2>Muhammad Muneeb Awan</h2>
@@ -585,8 +595,8 @@
             <span class="lang-badge"><i class="fas fa-code"></i> C++</span>
         </div>
 
-        <!-- Theme Toggle + Footer -->
-        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:center;">
+        <!-- Theme Toggle + Footer — pushed to the far right, same as contact.html -->
+        <div class="top-actions">
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                 <i class="fas fa-moon"></i> <span id="themeLabel">Dark</span>
             </button>
@@ -603,79 +613,97 @@
             <span class="badge"><i class="fas fa-user-graduate"></i> 2nd Semester · GPA 2.86</span>
         </div>
 
-        <!-- Stats -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-icon"><i class="fas fa-code"></i></div>
-                <div class="stat-info">
-                    <h3>6+</h3>
-                    <p>months</p>
-                </div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon"><i class="fas fa-rocket"></i></div>
-                <div class="stat-info">
-                    <h3>10</h3>
-                    <p>projects</p>
-                </div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon"><i class="fas fa-award"></i></div>
-                <div class="stat-info">
-                    <h3>4</h3>
-                    <p>certs</p>
-                </div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon"><i class="fas fa-users"></i></div>
-                <div class="stat-info">
-                    <h3>6</h3>
-                    <p>techs</p>
-                </div>
-            </div>
-        </div>
+        <!-- Everything below uses the Bootstrap 5 grid so it reflows cleanly
+             on phones, tablets, and laptops -->
+        <div class="container-fluid px-0">
 
-        <!-- Content Cards -->
-        <div class="content-cards">
-            <div class="info-card">
-                <div class="card-title"><i class="fas fa-smile"></i> About Me</div>
-                <p class="intro-text">
-                    👋 Hello! I'm <strong>Muhammad Muneeb Awan</strong>, a 19-year-old developer from Islamabad.
-                    I'm currently in my <strong>2nd semester</strong> of BS General Computing at
-                    <strong>ARID University</strong> with a <strong>2.86 GPA</strong>.
-                    I'm also interning at <strong>SoftTech Media</strong> where I've learned
-                    HTML, CSS, Flutter, JavaScript, Playwright, and C++.
-                </p>
-                <div class="highlight">
-                    <i class="fas fa-bullseye"></i>
-                    <strong>Current focus:</strong> Flutter · JavaScript · building real projects
+            <!-- Stats -->
+            <div class="row g-3 g-md-4">
+                <div class="col-6 col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-code"></i></div>
+                        <div class="stat-info">
+                            <h3>6+</h3>
+                            <p>months</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-rocket"></i></div>
+                        <div class="stat-info">
+                            <h3>10</h3>
+                            <p>projects</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-award"></i></div>
+                        <div class="stat-info">
+                            <h3>4</h3>
+                            <p>certs</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-users"></i></div>
+                        <div class="stat-info">
+                            <h3>6</h3>
+                            <p>techs</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="info-card">
-                <div class="card-title"><i class="fas fa-graduation-cap"></i> Academic &amp; Work</div>
-                <div class="qual-item">
-                    <i class="fas fa-university"></i>
-                    <div>
-                        <h4>BS General Computing · 2nd Semester</h4>
-                        <p>ARID University · GPA 2.86</p>
+            <!-- Content Cards -->
+            <div class="row g-4 mt-1">
+                <div class="col-12 col-lg-6">
+                    <div class="info-card">
+                        <div class="card-title"><i class="fas fa-smile"></i> About Me</div>
+                        <p class="intro-text">
+                            👋 Hello! I'm <strong>Muhammad Muneeb Awan</strong>, a 19-year-old developer from Islamabad.
+                            I'm currently in my <strong>2nd semester</strong> of BS General Computing at
+                            <strong>ARID University</strong> with a <strong>2.86 GPA</strong>.
+                            I'm also interning at <strong>SoftTech Media</strong> where I've learned
+                            HTML, CSS, Flutter, JavaScript, Playwright, and C++.
+                        </p>
+                        <div class="highlight">
+                            <i class="fas fa-bullseye"></i>
+                            <strong>Current focus:</strong> Flutter · JavaScript · building real projects
+                        </div>
                     </div>
                 </div>
-                <div class="qual-item">
-                    <i class="fas fa-briefcase"></i>
-                    <div>
-                        <h4>Intern · SoftTech Media</h4>
-                        <p>HTML · CSS · JavaScript · Playwright · Flutter · C++</p>
-                    </div>
-                </div>
-                <div class="qual-item">
-                    <i class="fas fa-certificate"></i>
-                    <div>
-                        <h4>Learning Journey</h4>
-                        <p>6+ months · 10+ projects · 4 certifications</p>
+
+                <div class="col-12 col-lg-6">
+                    <div class="info-card">
+                        <div class="card-title"><i class="fas fa-graduation-cap"></i> Academic &amp; Work</div>
+                        <div class="qual-item">
+                            <i class="fas fa-university"></i>
+                            <div>
+                                <h4>BS General Computing · 2nd Semester</h4>
+                                <p>ARID University · GPA 2.86</p>
+                            </div>
+                        </div>
+                        <div class="qual-item">
+                            <i class="fas fa-briefcase"></i>
+                            <div>
+                                <h4>Intern · SoftTech Media</h4>
+                                <p>HTML · CSS · JavaScript · Playwright · Flutter · C++</p>
+                            </div>
+                        </div>
+                        <div class="qual-item">
+                            <i class="fas fa-certificate"></i>
+                            <div>
+                                <h4>Learning Journey</h4>
+                                <p>6+ months · 10+ projects · 4 certifications</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
