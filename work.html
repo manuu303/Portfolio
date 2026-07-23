@@ -7,7 +7,7 @@
     <title>Muhammad Muneeb Awan · Work</title>
     <!-- Font Awesome 7 (Free) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
-    <style>
+    <style id="page-style">
         /* ===== CSS Variables (themes) ===== */
         * {
             margin: 0;
@@ -904,7 +904,9 @@
 
             <!-- Theme Toggle + Footer -->
             <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:center;">
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <!-- type="button" ensures this never acts as a form-submit
+                     control, so it will never cause a page reload -->
+                <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                     <i class="fas fa-moon"></i> <span id="themeLabel">Dark</span>
                 </button>
                 <div class="top-footer">
@@ -1122,38 +1124,172 @@
 
     <!-- ===== JavaScript: Theme Toggle ===== -->
     <script>
-        (function() {
-            // Theme Toggle
+    // =====================================================================
+    // SPA-style client-side router
+    // Fetches the other pages in the background and swaps only the
+    // page-specific <style id="page-style"> block and the .dashboard
+    // content in place, then updates the browser URL via the History API.
+    // Result: navigating between pages never triggers a full page reload,
+    // so scroll position, the current theme, and any state outside the
+    // swapped area (like this script itself) are preserved.
+    //
+    // NOTE: fetch() requires the site to be served over http(s) (e.g. a
+    // local dev server or real hosting). If opened directly as a local
+    // file:// URL, some browsers block fetch() for security reasons — in
+    // that case loadPage() below automatically falls back to a normal
+    // (reloading) navigation so the links still work.
+    // =====================================================================
+    (function () {
+        'use strict';
+
+        const NAV_PAGES = ['index.html', 'contact.html', 'missions.html', 'work.html'];
+
+        // ---- Page-specific setup — re-run after every content swap ----
+        // Guards (`if (el) {...}`) let this one function safely handle
+        // elements that only exist on some pages (e.g. the contact form).
+        function initPage() {
+            // Theme toggle (present on every page)
             const themeToggle = document.getElementById('themeToggle');
             const themeLabel = document.getElementById('themeLabel');
             const html = document.documentElement;
 
-            let currentTheme = localStorage.getItem('theme') || 'light';
-            html.setAttribute('data-theme', currentTheme);
-            updateIcon(currentTheme);
-
-            themeToggle.addEventListener('click', function() {
-                const newTheme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-                html.setAttribute('data-theme', newTheme);
-                localStorage.setItem('theme', newTheme);
-                updateIcon(newTheme);
-            });
-
             function updateIcon(theme) {
+                if (!themeToggle) return;
                 const icon = themeToggle.querySelector('i');
                 if (theme === 'dark') {
                     icon.className = 'fas fa-sun';
-                    themeLabel.textContent = 'Light';
+                    if (themeLabel) themeLabel.textContent = 'Light';
                 } else {
                     icon.className = 'fas fa-moon';
-                    themeLabel.textContent = 'Dark';
+                    if (themeLabel) themeLabel.textContent = 'Dark';
                 }
             }
 
-            console.log('💼 Work page — Muhammad Muneeb Awan');
-            console.log('📁 Check out my projects and experience!');
-        })();
-    </script>
+            if (themeToggle) {
+                const currentTheme = localStorage.getItem('theme') || 'light';
+                html.setAttribute('data-theme', currentTheme);
+                updateIcon(currentTheme);
+
+                themeToggle.addEventListener('click', function () {
+                    const newTheme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+                    html.setAttribute('data-theme', newTheme);
+                    localStorage.setItem('theme', newTheme);
+                    updateIcon(newTheme);
+                });
+            }
+
+            // Contact form (only present on contact.html) — submits
+            // dynamically via JS instead of reloading the page.
+            const form = document.getElementById('contactForm');
+            if (form) {
+                const successMsg = document.getElementById('formSuccess');
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault(); // stop native submit / page reload
+                    successMsg.classList.add('show');
+                    setTimeout(() => {
+                        successMsg.classList.remove('show');
+                        form.reset();
+                    }, 3000);
+                });
+            }
+
+            // Mission progress bars (only present on missions.html)
+            const fills = document.querySelectorAll('.progress-fill');
+            if (fills.length) {
+                fills.forEach((fill, index) => {
+                    fill.style.width = '0%';
+                    const width = fill.getAttribute('data-width');
+                    setTimeout(() => {
+                        fill.style.width = width + '%';
+                    }, 300 + index * 100);
+                });
+            }
+        }
+
+        // ---- Highlight the nav link matching the current page ----
+        function setActiveNav(filename) {
+            document.querySelectorAll('.nav-links li').forEach(li => {
+                const a = li.querySelector('a');
+                const href = a ? a.getAttribute('href').split('/').pop() : '';
+                li.classList.toggle('active', href === filename);
+            });
+        }
+
+        // ---- Fetch a page and swap it in without reloading ----
+        async function loadPage(filename, pushHistory) {
+            try {
+                const response = await fetch(filename, { cache: 'no-cache' });
+                if (!response.ok) throw new Error('Failed to fetch ' + filename);
+                const html = await response.text();
+                const newDoc = new DOMParser().parseFromString(html, 'text/html');
+
+                // Swap the page-specific stylesheet (it's a full superset
+                // of shared + page-only rules, so swapping it wholesale
+                // never leaves any needed CSS missing).
+                const newStyle = newDoc.getElementById('page-style');
+                const currentStyle = document.getElementById('page-style');
+                if (newStyle && currentStyle) {
+                    currentStyle.textContent = newStyle.textContent;
+                }
+
+                // Swap the dashboard content itself
+                const newDashboard = newDoc.querySelector('.dashboard');
+                const currentDashboard = document.querySelector('.dashboard');
+                if (newDashboard && currentDashboard) {
+                    currentDashboard.replaceWith(document.adoptNode(newDashboard));
+                }
+
+                document.title = newDoc.title;
+
+                if (pushHistory) {
+                    history.pushState({ page: filename }, '', filename);
+                }
+
+                setActiveNav(filename);
+                initPage(); // re-bind events on the freshly swapped content
+                window.scrollTo(0, 0);
+            } catch (err) {
+                // Graceful fallback (e.g. fetch blocked on file:// origins)
+                console.warn('SPA navigation unavailable, falling back to normal navigation:', err);
+                window.location.href = filename;
+            }
+        }
+
+        // ---- Click delegation: nav links + the reload-safeguard ----
+        document.addEventListener('click', function (e) {
+            const link = e.target.closest('.nav-links a');
+            if (link) {
+                const filename = link.getAttribute('href').split('/').pop();
+                if (NAV_PAGES.includes(filename)) {
+                    e.preventDefault(); // stop the browser's default full navigation
+                    const current = window.location.pathname.split('/').pop() || 'index.html';
+                    if (filename !== current) {
+                        loadPage(filename, true);
+                    }
+                }
+                return;
+            }
+
+            // No-reload safeguard: any non-submit button never triggers
+            // default browser behavior (relevant if one is ever nested
+            // inside a <form> in the future).
+            const btn = e.target.closest('button');
+            if (btn && btn.type !== 'submit') {
+                e.preventDefault();
+            }
+        });
+
+        // ---- Browser Back / Forward support ----
+        window.addEventListener('popstate', function () {
+            const filename = window.location.pathname.split('/').pop() || 'index.html';
+            loadPage(filename, false);
+        });
+
+        // ---- Initial setup for whichever page loaded first ----
+        initPage();
+        console.log('🚀 SPA navigation active — pages swap without reloading');
+    })();
+</script>
 
 </body>
 
