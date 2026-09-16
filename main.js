@@ -1,6 +1,6 @@
 /* ==========================================================================
    MUHAMMAD MUNEEB AWAN — 2026 FUTURISTIC CYBER LOGIC
-   Particle Network, Text Decoders, 3D Card Tilt, HUD Diagnostics, Form
+    Particle Network, Text Decoders, 3D Card Tilt, HUD Diagnostics, Web3Forms
    ========================================================================== */
 
 (function () {
@@ -380,27 +380,94 @@
     }
 
     // =========================================================================
-    // 9. Contact Terminal Form Handling
+    // 9. Contact Terminal Form Handling (Dispatches through Web3Forms)
     // =========================================================================
     const form = document.getElementById('contactForm');
     if (form) {
         const successMsg = document.getElementById('formSuccess');
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const submitBtn = form.querySelector('.form__submit span');
-            const origText = submitBtn ? submitBtn.textContent : '';
-            if (submitBtn) submitBtn.textContent = 'ENCRYPTING & TRANSMITTING...';
+        const successText = document.getElementById('formSuccessText');
+        const errorMsg = document.getElementById('formError');
+        const errorText = document.getElementById('formErrorText');
+        const submitBtn = document.getElementById('formSubmitBtn') || form.querySelector('.form__submit');
+        const submitBtnText = submitBtn ? submitBtn.querySelector('span') : null;
+        const submitBtnIcon = submitBtn ? submitBtn.querySelector('i') : null;
 
-            setTimeout(() => {
-                if (submitBtn) submitBtn.textContent = origText;
-                if (successMsg) {
-                    successMsg.classList.add('show');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Extract values
+            const name = (document.getElementById('name')?.value || '').trim();
+            const email = (document.getElementById('email')?.value || '').trim();
+            const subject = (document.getElementById('subject')?.value || '').trim();
+            const message = (document.getElementById('message')?.value || '').trim();
+
+            if (!name || !email || !message) {
+                return;
+            }
+
+            // Save original button state and trigger futuristic loading HUD
+            const origText = submitBtnText ? submitBtnText.textContent : 'DISPATCH TRANSMISSION';
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.style.opacity = '0.75';
+                submitBtn.style.cursor = 'not-allowed';
+            }
+            if (submitBtnText) submitBtnText.textContent = 'TRANSMITTING TO NODE...';
+            if (submitBtnIcon) submitBtnIcon.className = 'fas fa-circle-notch fa-spin';
+
+            if (successMsg) successMsg.classList.remove('show');
+            if (errorMsg) errorMsg.classList.remove('show');
+
+            try {
+                const payload = {
+                    access_key: 'e2727498-678f-42b2-b582-5a901d485934',
+                    name: name,
+                    email: email,
+                    subject: subject || 'Portfolio Inquiry',
+                    message: message,
+                    from_name: name
+                };
+
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+
+                if (response.ok && (data.success === 'true' || data.success === true)) {
+                    if (successText) {
+                        successText.textContent = 'TRANSMISSION DELIVERED DIRECTLY TO ARTISTUNKNOWN0303@GMAIL.COM.';
+                    }
+                    if (successMsg) successMsg.classList.add('show');
+                    form.reset();
+
                     setTimeout(() => {
-                        successMsg.classList.remove('show');
-                        form.reset();
-                    }, 4000);
+                        if (successMsg) successMsg.classList.remove('show');
+                    }, 6500);
+                } else {
+                    throw new Error(data.message || 'Server responded with an error.');
                 }
-            }, 800);
+            } catch (err) {
+                console.error('Contact Form Transmission Error:', err);
+                const mailtoFallback = `mailto:artistunknown0303@gmail.com?subject=${encodeURIComponent(subject || 'Portfolio Query')}&body=${encodeURIComponent(`Sender: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+                if (errorText) {
+                    errorText.innerHTML = `TRANSMISSION INTERRUPTED. <a href="${mailtoFallback}">CLICK HERE TO TRANSMIT DIRECTLY VIA EMAIL CLIENT</a>.`;
+                }
+                if (errorMsg) errorMsg.classList.add('show');
+            } finally {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.style.opacity = '1';
+                    submitBtn.style.cursor = 'pointer';
+                }
+                if (submitBtnText) submitBtnText.textContent = origText;
+                if (submitBtnIcon) submitBtnIcon.className = 'fas fa-satellite-dish';
+            }
         });
     }
 

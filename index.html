@@ -729,7 +729,7 @@
                             <div class="contact__item-text">
                                 <span class="contact__item-label">Direct Email</span>
                                 <span class="contact__item-value">
-                                    <a href="mailto:mrmanuu00@gmail.com">mrmanuu00@gmail.com</a>
+                                    <a href="mailto:artistunknown0303@gmail.com">artistunknown0303@gmail.com</a>
                                 </span>
                             </div>
                         </div>
@@ -792,36 +792,43 @@
                             <span>&gt; TRANSMIT_MESSAGE</span>
                         </h3>
 
-                        <form id="contactForm">
+                        <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+                            <input type="hidden" name="access_key" value="e2727498-678f-42b2-b582-5a901d485934" />
+
                             <div class="form__row">
                                 <div class="form__group">
                                     <label for="name" class="form__label">&gt; SENDER_NAME</label>
-                                    <input type="text" id="name" class="form__input" placeholder="e.g. Alex Mercer" required />
+                                    <input type="text" id="name" name="name" class="form__input" placeholder="e.g. Alex Mercer" required />
                                 </div>
                                 <div class="form__group">
                                     <label for="email" class="form__label">&gt; SENDER_EMAIL</label>
-                                    <input type="email" id="email" class="form__input" placeholder="e.g. alex@example.com" required />
+                                    <input type="email" id="email" name="email" class="form__input" placeholder="e.g. alex@example.com" required />
                                 </div>
                             </div>
 
                             <div class="form__group">
                                 <label for="subject" class="form__label">&gt; TRANSMISSION_SUBJECT</label>
-                                <input type="text" id="subject" class="form__input" placeholder="Project collaboration, internship offer..." required />
+                                <input type="text" id="subject" name="subject" class="form__input" placeholder="Project collaboration, internship offer..." required />
                             </div>
 
                             <div class="form__group">
                                 <label for="message" class="form__label">&gt; MESSAGE_PAYLOAD</label>
-                                <textarea id="message" class="form__textarea" placeholder="Detail your project specifications, inquiries, or opportunities..." required></textarea>
+                                <textarea id="message" name="message" class="form__textarea" placeholder="Detail your project specifications, inquiries, or opportunities..." required></textarea>
                             </div>
 
-                            <button type="submit" class="btn btn--primary form__submit">
+                            <button type="submit" class="btn btn--primary form__submit" id="formSubmitBtn">
                                 <i class="fas fa-satellite-dish"></i>
                                 <span>DISPATCH TRANSMISSION</span>
                             </button>
 
                             <div class="form__success" id="formSuccess">
                                 <i class="fas fa-check-circle"></i>
-                                <span>TRANSMISSION ENCRYPTED &amp; DELIVERED SUCCESSFULLY.</span>
+                                <span id="formSuccessText">TRANSMISSION DELIVERED DIRECTLY TO ARTISTUNKNOWN0303@GMAIL.COM.</span>
+                            </div>
+
+                            <div class="form__error" id="formError">
+                                <i class="fas fa-triangle-exclamation"></i>
+                                <span id="formErrorText">TRANSMISSION FAILED. PLEASE RETRY OR TRANSMIT DIRECTLY.</span>
                             </div>
                         </form>
                     </div>
@@ -846,7 +853,7 @@
                 <a href="https://www.instagram.com/spidyy_404/" target="_blank" rel="noopener noreferrer" class="footer__link" aria-label="Instagram">
                     <i class="fa-brands fa-instagram"></i>
                 </a>
-                <a href="mailto:mrmanuu00@gmail.com" class="footer__link" aria-label="Email">
+                <a href="mailto:artistunknown0303@gmail.com" class="footer__link" aria-label="Email">
                     <i class="fas fa-envelope"></i>
                 </a>
             </div>

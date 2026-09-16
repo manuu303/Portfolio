@@ -1713,23 +1713,48 @@ input, textarea { font: inherit; }
     margin-top: 6px;
 }
 
-.form__success {
+.form__success,
+.form__error {
     display: none;
     padding: 14px 18px;
-    background: rgba(0, 255, 157, 0.1);
-    border: 1px solid rgba(0, 255, 157, 0.3);
     border-radius: var(--radius-md);
-    color: var(--emerald);
     font-family: var(--font-mono);
     font-size: 0.85rem;
     font-weight: 600;
     margin-top: 16px;
+    line-height: 1.5;
 }
 
-.form__success.show {
+.form__success {
+    background: rgba(0, 255, 157, 0.1);
+    border: 1px solid rgba(0, 255, 157, 0.35);
+    color: var(--emerald);
+    box-shadow: 0 0 20px rgba(0, 255, 157, 0.15);
+}
+
+.form__error {
+    background: rgba(255, 0, 127, 0.1);
+    border: 1px solid rgba(255, 0, 127, 0.4);
+    color: #ff3388;
+    box-shadow: 0 0 20px rgba(255, 0, 127, 0.15);
+}
+
+.form__success.show,
+.form__error.show {
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+.form__error a {
+    color: var(--cyan);
+    text-decoration: underline;
+    transition: color var(--transition-fast);
+}
+
+.form__error a:hover {
+    color: #ffffff;
+    text-shadow: 0 0 8px var(--cyan);
 }
 
 /* ==========================================================================
